@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  * @author jose
  */
 public class MapaDemoApp extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
@@ -34,5 +34,5 @@ public class MapaDemoApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
