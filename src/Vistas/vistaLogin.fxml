@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="Controladores.VistaLoginController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.VistaLoginController">
    <children>
       <VBox prefHeight="650.0" prefWidth="850.0">
          <children>
@@ -23,37 +22,41 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autenticarse" textAlignment="CENTER" wrappingWidth="253.1575927734375" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="219.0" prefWidth="850.0">
+            <VBox prefHeight="364.0" prefWidth="769.0">
                <children>
-                  <GridPane prefHeight="225.0" prefWidth="467.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <HBox alignment="CENTER" prefHeight="262.0" prefWidth="850.0">
                      <children>
-                        <Label text="Nombre de usuario" />
-                        <Label text="Contraseña" GridPane.rowIndex="2" />
-                        <TextField prefHeight="34.0" prefWidth="721.0" GridPane.rowIndex="1" />
-                        <TextField prefHeight="34.0" prefWidth="721.0" GridPane.rowIndex="3" />
+                        <GridPane prefHeight="225.0" prefWidth="467.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Nombre de usuario" />
+                              <Label text="Contraseña" GridPane.rowIndex="2" />
+                              <TextField fx:id="nickname_login" prefHeight="34.0" prefWidth="721.0" GridPane.rowIndex="1" />
+                              <TextField fx:id="password_login" prefHeight="34.0" prefWidth="721.0" GridPane.rowIndex="3" />
+                           </children>
+                        </GridPane>
                      </children>
-                  </GridPane>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="74.0" prefWidth="850.0">
+                     <children>
+                        <Button fx:id="button_login" mnemonicParsing="false" prefHeight="37.0" prefWidth="314.0" text="Iniciar sesión" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="131.0" prefWidth="850.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="314.0" text="Iniciar sesión" />
-               </children>
-            </HBox>
+            </VBox>
             <Separator prefHeight="57.0" prefWidth="850.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="¿No tienes una cuenta?" />
-                  <Hyperlink text="Registrate aquí:" />
+                  <Hyperlink text="Registrate aquí" />
                </children>
             </HBox>
          </children>
