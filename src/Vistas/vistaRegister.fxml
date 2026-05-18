@@ -76,7 +76,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="52.0" prefWidth="121.0" GridPane.rowIndex="1">
                                  <children>
-                                    <ImageView fitHeight="52.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="imagen_register" fitHeight="52.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </HBox>
                            </children>
