@@ -39,7 +39,7 @@
                         </ImageView>
                      </children>
                   </GridPane>
-                  <Region prefHeight="59.0" prefWidth="493.0" />
+                  <Region prefHeight="41.0" prefWidth="499.0" />
                   <Button fx:id="bottonCerrar" mnemonicParsing="false" text="x" />
                </children>
             </HBox>
@@ -65,14 +65,14 @@
                                  <children>
                                     <Label styleClass="form-label" text="Nombre de usuario" />
                                     <TextField fx:id="nickname_login" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="450.0" promptText="ej.: pepito123" />
-                                    <Label fx:id="nicknameError" />
+                                    <Label fx:id="nicknameError" styleClass="error-label" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="72.0" prefWidth="460.0" GridPane.rowIndex="1">
                                  <children>
                                     <Label styleClass="form-label" text="Contraseña" />
                                     <TextField fx:id="password_login" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="450.0" promptText="***********" />
-                                    <Label fx:id="passwordError" />
+                                    <Label fx:id="passwordError" styleClass="error-label" />
                                  </children>
                               </VBox>
                            </children>

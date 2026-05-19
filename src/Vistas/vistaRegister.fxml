@@ -66,28 +66,28 @@
                                  <children>
                                     <Label fx:id="nicknameError" styleClass="form-label" text="Nombre de usuario*" />
                                     <TextField fx:id="nickname_register" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="500.0" promptText="ej.: pepito123" />
-                                    <Label />
+                                    <Label styleClass="error-label" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                  <children>
                                     <Label styleClass="form-label" text="Contraseña*" />
                                     <TextField fx:id="password_register" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="300.0" promptText="********" />
-                                    <Label fx:id="paswordError" />
+                                    <Label fx:id="paswordError" styleClass="error-label" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                  <children>
                                     <Label styleClass="form-label" text="Correo electrónico*" />
                                     <TextField fx:id="mail_register" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="ej.: pepito@gmail.com" />
-                                    <Label fx:id="mailError" />
+                                    <Label fx:id="mailError" styleClass="error-label" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
                                  <children>
                                     <Label styleClass="form-label" text="Fecha de nacimiento*" />
                                     <DatePicker fx:id="date_register" promptText="06/06/2006" />
-                                    <Label fx:id="dateError" />
+                                    <Label fx:id="dateError" styleClass="error-label" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
@@ -95,6 +95,7 @@
                                     <GridPane prefHeight="67.0" prefWidth="574.0">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                       </columnConstraints>
                                       <rowConstraints>
@@ -102,7 +103,12 @@
                                       </rowConstraints>
                                        <children>
                                           <Label styleClass="form-label" text="Foto de perfil" />
-                                          <Button fx:id="imagenButton_register" mnemonicParsing="false" styleClass="secondary-button" text="Subir imagen" GridPane.columnIndex="1" />
+                                          <Button fx:id="imagenButton_register" mnemonicParsing="false" styleClass="secondary-button" text="Subir imagen" GridPane.columnIndex="2" />
+                                          <ImageView fx:id="logoImagen" fitHeight="54.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" styleClass="logo" GridPane.columnIndex="1">
+                                             <image>
+                                                <Image url="@../logos/logo_usuario.png" />
+                                             </image>
+                                          </ImageView>
                                        </children>
                                     </GridPane>
                                     <Label fx:id="fotoPath" />
