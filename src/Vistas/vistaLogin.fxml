@@ -39,8 +39,8 @@
                            <children>
                               <Label text="Nombre de usuario" />
                               <Label text="Contraseña" GridPane.rowIndex="2" />
-                              <TextField fx:id="nickname_login" prefHeight="34.0" prefWidth="721.0" GridPane.rowIndex="1" />
-                              <TextField fx:id="password_login" prefHeight="34.0" prefWidth="721.0" GridPane.rowIndex="3" />
+                              <TextField fx:id="nickname_login" prefHeight="34.0" prefWidth="721.0" promptText="ej.: pepito123" GridPane.rowIndex="1" />
+                              <TextField fx:id="password_login" prefHeight="34.0" prefWidth="721.0" promptText="***********" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </children>
