@@ -10,10 +10,17 @@ public class MapaDemoApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+<<<<<<< actividad
+        stage.setTitle("SaforRun");
+
+        stage.getIcons().add(
+              new Image(getClass().getResourceAsStream("/resources/logo.png"))
+        );
+
         cargarVista("/Vistas/vistaLogin.fxml", stage);
 
-        stage.setTitle("SaforRun");
        
+>>>>>>> master
     }
 
     public static void main(String[] args) {
