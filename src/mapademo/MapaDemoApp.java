@@ -10,7 +10,6 @@ public class MapaDemoApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-<<<<<<< actividad
         stage.setTitle("SaforRun");
 
         stage.getIcons().add(
@@ -20,7 +19,6 @@ public class MapaDemoApp extends Application {
         cargarVista("/Vistas/vistaLogin.fxml", stage);
 
        
->>>>>>> master
     }
 
     public static void main(String[] args) {
