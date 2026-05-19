@@ -4,6 +4,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,7 +18,7 @@
    <children>
       <VBox prefHeight="650.0" prefWidth="850.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header">
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="200.0" styleClass="header">
                <children>
                   <GridPane>
                     <columnConstraints>
@@ -31,7 +32,11 @@
                      <children>
                         <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="57.0" text="&lt;-" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="app-title" text="SaforRun" GridPane.columnIndex="1" />
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="logo" GridPane.columnIndex="2" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="logo" GridPane.columnIndex="2">
+                           <image>
+                              <Image url="@../logos/logo_montana.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </GridPane>
                </children>
@@ -45,7 +50,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="411.0" prefWidth="850.0">
                      <children>
-                        <GridPane prefHeight="324.0" prefWidth="574.0">
+                        <GridPane prefHeight="401.0" prefWidth="501.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
@@ -60,21 +65,21 @@
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label fx:id="nicknameError" styleClass="form-label" text="Nombre de usuario*" />
-                                    <TextField fx:id="nickname_register" prefHeight="25.0" prefWidth="486.0" promptText="ej.: pepito123" />
+                                    <TextField fx:id="nickname_register" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="500.0" promptText="ej.: pepito123" />
                                     <Label />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                  <children>
                                     <Label styleClass="form-label" text="Contraseña*" />
-                                    <TextField fx:id="password_register" prefHeight="41.0" prefWidth="565.0" promptText="********" />
+                                    <TextField fx:id="password_register" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="300.0" promptText="********" />
                                     <Label fx:id="paswordError" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                  <children>
                                     <Label styleClass="form-label" text="Correo electrónico*" />
-                                    <TextField fx:id="mail_register" promptText="ej.: pepito@gmail.com" />
+                                    <TextField fx:id="mail_register" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="ej.: pepito@gmail.com" />
                                     <Label fx:id="mailError" />
                                  </children>
                               </VBox>
@@ -97,7 +102,7 @@
                                       </rowConstraints>
                                        <children>
                                           <Label styleClass="form-label" text="Foto de perfil" />
-                                          <Button fx:id="imagenButton_register" mnemonicParsing="false" text="Subir imagen" GridPane.columnIndex="1" />
+                                          <Button fx:id="imagenButton_register" mnemonicParsing="false" styleClass="secondary-button" text="Subir imagen" GridPane.columnIndex="1" />
                                        </children>
                                     </GridPane>
                                     <Label fx:id="fotoPath" />
