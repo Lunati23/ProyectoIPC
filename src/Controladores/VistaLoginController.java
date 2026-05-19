@@ -6,7 +6,10 @@ package Controladores;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -14,6 +17,13 @@ import javafx.fxml.Initializable;
  * @author vinte
  */
 public class VistaLoginController implements Initializable {
+
+    @FXML
+    private TextField nickname_login;
+    @FXML
+    private TextField password_login;
+    @FXML
+    private Button button_login;
 
     /**
      * Initializes the controller class.

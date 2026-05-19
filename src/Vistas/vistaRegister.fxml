@@ -13,14 +13,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="Controladores.VistaRegisterController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" stylesheets="@../EstilosVariados/estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.VistaRegisterController">
    <children>
       <VBox prefHeight="650.0" prefWidth="850.0">
          <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="header">
+               <children>
+                  <GridPane prefHeight="35.0" prefWidth="382.0" styleClass="logo-container">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.33331298828125" minWidth="10.0" prefWidth="90.66668701171875" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.99995930989581" minWidth="10.0" prefWidth="165.99995930989581" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="171.66668701171872" minWidth="10.0" prefWidth="120.3333740234375" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="app-title" text="SaforRun" textAlignment="RIGHT" wrappingWidth="164.19928359985352" GridPane.columnIndex="1" />
+                        <Button mnemonicParsing="false" text="&lt;-" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="logo" GridPane.columnIndex="2" />
+                     </children>
+                  </GridPane>
+               </children>
+            </HBox>
             <HBox alignment="CENTER" prefHeight="111.0" prefWidth="543.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Registro" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Registro" />
                </children>
             </HBox>
             <VBox alignment="CENTER" prefHeight="544.0" prefWidth="850.0">
@@ -42,12 +60,12 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Nombre de usuario*" />
-                              <Label text="Contraseña*" GridPane.rowIndex="2" />
-                              <Label text="Correo electrónico*" GridPane.rowIndex="4" />
-                              <Label text="Fecha de nacimiento*" GridPane.rowIndex="6" />
+                              <Label styleClass="form-label" text="Nombre de usuario*" />
+                              <Label styleClass="form-label" text="Contraseña*" GridPane.rowIndex="2" />
+                              <Label styleClass="form-label" text="Correo electrónico*" GridPane.rowIndex="4" />
+                              <Label styleClass="form-label" text="Fecha de nacimiento*" GridPane.rowIndex="6" />
                               <TextField fx:id="nickname_register" prefHeight="25.0" prefWidth="486.0" promptText="ej.: pepito123" GridPane.rowIndex="1" />
-                              <TextField fx:id="password_register" promptText="********" GridPane.rowIndex="3" />
+                              <TextField fx:id="password_register" prefHeight="41.0" prefWidth="499.0" promptText="********" GridPane.rowIndex="3" />
                               <TextField fx:id="mail_register" promptText="ej.: pepito@gmail.com" GridPane.rowIndex="5" />
                               <DatePicker fx:id="date_register" promptText="06/06/2006" GridPane.rowIndex="7" />
                            </children>
@@ -67,8 +85,8 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Foto de perfil" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="name.png" GridPane.rowIndex="2" />
+                              <Label styleClass="form-label" text="Foto de perfil" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="small-text" text="name.png" GridPane.rowIndex="2" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
                                     <Button fx:id="imagenButton_register" mnemonicParsing="false" text="Subir imagen" />
