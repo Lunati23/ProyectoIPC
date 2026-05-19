@@ -570,30 +570,74 @@ S17.642,20.762,13.558,20.762z";
 }
 
 /* =========================================================
-   CLOSE BUTTON
+   HEADER / TOPBAR
    ========================================================= */
 
-.close-button {
+.header {
 
-    -fx-background-color: transparent;
+    -fx-background-color: white;
 
-    -fx-text-fill: #64748B;
+    -fx-padding: 14 22 14 22;
 
-    -fx-font-size: 18px;
+    -fx-spacing: 15;
+
+    -fx-alignment: CENTER_LEFT;
+
+    -fx-border-color: #DDD6FE;
+
+    -fx-border-width: 0 0 1 0;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(124,58,237,0.08),
+        10,
+        0.1,
+        0,
+        1
+    );
+}
+
+/* =========================================================
+   LOGO CONTAINER
+   ========================================================= */
+
+.logo-container {
+
+    -fx-spacing: 12;
+
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* =========================================================
+   LOGO IMAGE
+   ========================================================= */
+
+.logo {
+
+    -fx-fit-width: 42;
+    -fx-fit-height: 42;
+}
+
+/* =========================================================
+   APP TITLE
+   ========================================================= */
+
+.app-title {
+
+    -fx-font-size: 28px;
 
     -fx-font-weight: bold;
 
-    -fx-cursor: hand;
-
-    -fx-background-radius: 100;
-
-    -fx-pref-width: 36;
-    -fx-pref-height: 36;
+    -fx-text-fill: #4C1D95;
 }
 
-.close-button:hover {
+/* =========================================================
+   APP SUBTITLE
+   ========================================================= */
 
-    -fx-background-color: #FEE2E2;
+.app-subtitle {
 
-    -fx-text-fill: #DC2626;
+    -fx-font-size: 12px;
+
+    -fx-text-fill: #64748B;
 }
