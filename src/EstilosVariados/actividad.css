@@ -20,7 +20,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 .tab-pane .tab {
-    -fx-background-color: #EDE9FE;
+    /* 20% - Morado muy suave de superficie interactiva */
+    -fx-background-color: #EDE9FE; 
     -fx-background-radius: 8 8 0 0;
     -fx-background-insets: 0 4 0 0;
     -fx-padding: 8 16 8 16;
@@ -28,7 +29,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 .tab-pane .tab .tab-label {
-    -fx-text-fill: #4C1D95; 
+    /* Hereda el color morado oscuro del subtítulo general */
+    -fx-text-fill: #5B21B6;  
     -fx-font-weight: bold;
     -fx-font-size: 13px;
 }
@@ -37,9 +39,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-color: #DDD6FE;
 }
 
-
 .tab-pane .tab:selected {
-    -fx-background-color: #7C3AED; 
+    /* Morado primario oficial */
+    -fx-background-color: #7C3AED;  
 }
 
 .tab-pane .tab:selected .tab-label {
@@ -56,23 +58,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .stat-card {
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 12;
-    -fx-border-color: #E9E5FF; /* Borde morado pastel */
+    /* Usamos el color de borde suave definido en el nuevo root */
+    -fx-border-color: #E9E5FF; 
     -fx-border-radius: 12;
     -fx-border-width: 1;
+    /* Sombra difuminada corporativa con el tono del morado suave */
     -fx-effect: dropshadow(gaussian, rgba(124,58,237,0.05), 10, 0, 0, 2);
 }
 
-
 .stat-title {
     -fx-font-size: 11px;
-    -fx-text-fill: #64748B; /* Gris secundario neutro */
+    /* text-secondary del nuevo css global */
+    -fx-text-fill: #64748B; 
     -fx-font-weight: bold;
 }
 
 .stat-value {
-    -fx-font-size: 18px;
-    -fx-font-weight: regular;
-    -fx-text-fill: blueviolet;
+    /* REAJUSTE: Eliminamos blueviolet y aplicamos la clase stat-number oficial */
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4C1D95; /* El morado oscuro oficial para números grandes */
 }
 
 
@@ -80,38 +85,58 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 /* Caja Verde de Subida */
 .stat-card-upload {
-    -fx-background-color: #EDF7ED; 
+    /* success-color suavizado */
+    -fx-background-color: #EDF7ED;  
     -fx-background-radius: 10;
 }
-.stat-card-upload .stat-title { -fx-text-fill: #2E7D32; }
-.stat-card-upload .stat-value { -fx-text-fill: #1E4620; }
+/* Usamos de forma limpia los colores de éxito (success-color) del nuevo CSS */
+.stat-card-upload .stat-title { -fx-text-fill: #22C55E; } 
+.stat-card-upload .stat-value { -fx-text-fill: #14532D; }
 
 /* Caja Roja de Bajada */
 .stat-card-download {
-    -fx-background-color: #FDF2F2; 
+    /* danger-color suavizado */
+    -fx-background-color: #FDF2F2;  
     -fx-background-radius: 10;
 }
-.stat-card-download .stat-title { -fx-text-fill: #C81E1E; }
-.stat-card-download .stat-value { -fx-text-fill: #9B1C1C; }
+/* Usamos de forma limpia los colores de peligro (danger-color) del nuevo CSS */
+.stat-card-download .stat-title { -fx-text-fill: #EF4444; }
+.stat-card-download .stat-value { -fx-text-fill: #7F1D1D; }
 
 
 /* ---------- LISTA DE ANOTACIONES INTERNAS (ListView/ListCell) ---------- */
 
-.annotation-list-cell {
-    -fx-background-color: #FFFFFF;
-    -fx-border-color: #EDE9FE;
-    -fx-border-width: 0 0 1 0; 
-    -fx-padding: 12 10 12 10;
+.list-view {
+    -fx-background-color: white;
+    /* Usamos el border-color general del nuevo root */
+    -fx-border-color: #D8D4FE;  
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
 }
 
+/* Diseño de celdas unificado */
+.annotation-cell, 
+.annotation-list-cell {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 12 14 12 14; 
+    -fx-border-color: #EDE9FE;
+    -fx-border-width: 0 0 1 0; 
+    -fx-text-fill: #1E1B4B; /* text-color general */
+    -fx-font-size: 13px;
+}
+
+.annotation-cell:hover, 
 .annotation-list-cell:hover {
-    -fx-background-color: #F5F7FF; 
+    -fx-background-color: #F5F7FF; /* background-color claro general */
     -fx-cursor: hand;
 }
 
+.annotation-cell:focused, 
+.annotation-cell:selected,
 .annotation-list-cell:selected {
-    -fx-background-color: #EDE9FE;
-    -fx-text-fill: #4C1D95;
+    -fx-background-color: #EDE9FE; /* Fondo morado suave de celda seleccionada */
+    -fx-text-fill: #7C3AED;        /* Texto con el color primario de relieve */
+    -fx-font-weight: bold;
 }
 
 
@@ -123,62 +148,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 .chart-series-line {
-    -fx-stroke: #3B82F6; 
+    /* 10% - El azul de acento (accent-color) resalta el trazado de relieve */
+    -fx-stroke: #3B82F6;  
     -fx-stroke-width: 3px;
 }
 
+/* Sombreado elegante en degradado de la montaña */
 .chart-area-fill {
-    -fx-fill: linear-gradient(to bottom, rgba(59, 130, 246, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+    -fx-fill: linear-gradient(to bottom, rgba(59, 130, 246, 0.25) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 .axis {
     -fx-font-size: 10px;
-    -fx-tick-label-fill: #64748B;
+    -fx-tick-label-fill: #64748B; /* text-secondary general */
 }
+
 .axis-label {
-    -fx-font-size: 11px;
+    -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-text-fill: #4C1D95;
+    -fx-text-fill: #4C1D95; /* Color de títulos oscuros */
 }
 
 .chart-alternative-row-visible,
 .chart-alternative-column-visible {
     -fx-fill: transparent;
 }
+
 .chart-vertical-grid-lines,
 .chart-horizontal-grid-lines {
-    -fx-stroke: #F1F5F9; /* Rejilla muy sutil */
+    -fx-stroke: #E2E8F0; /* Rejilla sutil neutra */
 }
-
-/* ---------- LISTA DE ANOTACIONES (ListView) ---------- */
-
-
-.list-view {
-    -fx-background-color: #FFFFFF;
-    -fx-border-color: #D8D4FE; 
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-}
-
-
-.annotation-cell {
-    -fx-background-color: #FFFFFF;
-    -fx-padding: 12 14 12 14; 
-    -fx-border-color: #EDE9FE;
-    -fx-border-width: 0 0 1 0; 
-    -fx-text-fill: #1E1B4B;
-    -fx-font-size: 13px;
-}
-
-.annotation-cell:hover {
-    -fx-background-color: #F5F7FF; 
-    -fx-cursor: hand;
-}
-
-
-.annotation-cell:focused,
-.annotation-cell:selected {
-    -fx-background-color: #EDE9FE; 
-    -fx-text-fill: #7C3AED;        
-    -fx-font-weight: bold;
+.stat-value {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;      /* ¡Ponlo en negrita para que combine con el resto de la app! */
+    -fx-text-fill: #4C1D95;     /* Cambiamos el violeta por el morado oscuro oficial de SaforRun */
 }

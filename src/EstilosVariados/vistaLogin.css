@@ -1,0 +1,322 @@
+/* =========================================================
+   SAFORRUN - MAIN MENU CSS
+   Diseño moderno deportivo
+   ========================================================= */
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+.root {
+    -fx-background-color: #F8FAFC;
+    -fx-font-family: "Segoe UI";
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+
+    -fx-background-color: #1E293B;
+
+    -fx-padding: 28;
+
+    -fx-spacing: 14;
+
+    -fx-pref-width: 250;
+}
+
+/* =========================================================
+   LOGO + APP NAME
+   ========================================================= */
+
+.logo-container {
+
+    -fx-alignment: center-left;
+
+    -fx-spacing: 14;
+
+    -fx-padding: 0 0 25 0;
+}
+
+/* NOMBRE APP */
+
+.app-title {
+
+    -fx-font-size: 30px;
+
+    -fx-font-weight: bold;
+
+    -fx-text-fill: #FF6B35;
+}
+
+/* SUBTITULO */
+
+.app-subtitle {
+
+    -fx-font-size: 12px;
+
+    -fx-text-fill: #CBD5E1;
+}
+
+/* LOGO */
+
+.logo {
+
+    -fx-fit-width: 42;
+    -fx-fit-height: 42;
+}
+
+/* =========================================================
+   MENU BUTTONS
+   ========================================================= */
+
+.menu-button {
+
+    -fx-background-color: transparent;
+
+    -fx-text-fill: white;
+
+    -fx-font-size: 15px;
+
+    -fx-font-weight: bold;
+
+    -fx-alignment: CENTER_LEFT;
+
+    -fx-padding: 14 18;
+
+    -fx-background-radius: 14;
+
+    -fx-cursor: hand;
+
+    -fx-pref-width: 210;
+}
+
+/* HOVER */
+
+.menu-button:hover {
+
+    -fx-background-color: rgba(255,255,255,0.08);
+}
+
+/* BOTON ACTIVO */
+
+.menu-button-active {
+
+    -fx-background-color: #FF6B35;
+
+    -fx-text-fill: white;
+}
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar {
+
+    -fx-background-color: white;
+
+    -fx-padding: 16 24;
+
+    -fx-border-color: #E2E8F0;
+
+    -fx-border-width: 0 0 1 0;
+}
+
+/* TITULO SECCION */
+
+.section-title {
+
+    -fx-font-size: 24px;
+
+    -fx-font-weight: bold;
+
+    -fx-text-fill: #1E293B;
+}
+
+/* =========================================================
+   CONTENT AREA
+   ========================================================= */
+
+.content {
+
+    -fx-padding: 28;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card {
+
+    -fx-background-color: white;
+
+    -fx-background-radius: 22;
+
+    -fx-padding: 24;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.06),
+        18,
+        0.1,
+        0,
+        3
+    );
+}
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.stat-card {
+
+    -fx-background-color: white;
+
+    -fx-background-radius: 20;
+
+    -fx-padding: 22;
+
+    -fx-pref-width: 220;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.08),
+        14,
+        0.1,
+        0,
+        2
+    );
+}
+
+/* NUMERO */
+
+.stat-number {
+
+    -fx-font-size: 30px;
+
+    -fx-font-weight: bold;
+
+    -fx-text-fill: #FF6B35;
+}
+
+/* LABEL */
+
+.stat-label {
+
+    -fx-font-size: 13px;
+
+    -fx-text-fill: #64748B;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.button {
+
+    -fx-background-color: #FF6B35;
+
+    -fx-text-fill: white;
+
+    -fx-font-weight: bold;
+
+    -fx-font-size: 14px;
+
+    -fx-background-radius: 14;
+
+    -fx-padding: 12 20;
+
+    -fx-cursor: hand;
+}
+
+.button:hover {
+
+    -fx-background-color: #E85A2A;
+}
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.text-field,
+.password-field,
+.combo-box {
+
+    -fx-background-color: white;
+
+    -fx-background-radius: 14;
+
+    -fx-border-radius: 14;
+
+    -fx-padding: 12;
+
+    -fx-border-color: transparent;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.05),
+        8,
+        0.1,
+        0,
+        1
+    );
+}
+
+.text-field:focused,
+.password-field:focused,
+.combo-box:focused {
+
+    -fx-border-color: #FF6B35;
+
+    -fx-border-width: 2;
+}
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+.table-view {
+
+    -fx-background-color: white;
+
+    -fx-background-radius: 18;
+
+    -fx-border-radius: 18;
+
+    -fx-border-color: #E2E8F0;
+}
+
+.table-view .column-header {
+
+    -fx-background-color: #F1F5F9;
+}
+
+.table-row-cell:selected {
+
+    -fx-background-color: #FFE7DD;
+}
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
+.scroll-pane {
+
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+
+    -fx-background-color: transparent;
+}
+
+/* =========================================================
+   SEPARATORS
+   ========================================================= */
+
+.separator .line {
+
+    -fx-border-color: rgba(255,255,255,0.08);
+}
