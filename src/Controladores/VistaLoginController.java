@@ -6,10 +6,15 @@ package Controladores;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import mapademo.MapaDemoApp;
 
 /**
  * FXML Controller class
@@ -24,6 +29,14 @@ public class VistaLoginController implements Initializable {
     private TextField password_login;
     @FXML
     private Button button_login;
+    @FXML
+    private Button cerrarButton;
+    @FXML
+    private Label nickname_error;
+    @FXML
+    private Label password_error;
+    @FXML
+    private Hyperlink linkRegistro;
 
     /**
      * Initializes the controller class.
@@ -32,5 +45,27 @@ public class VistaLoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
     
+        @FXML
+    private void irRegistro(ActionEvent event) {
+
+        try {
+
+            Stage stage = (Stage)
+                    ((javafx.scene.Node) event.getSource())
+                            .getScene()
+                            .getWindow();
+
+            MapaDemoApp.cargarVista(
+                    "/Vistas/vistaRegister.fxml",
+                    stage
+            );
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
 }
+    

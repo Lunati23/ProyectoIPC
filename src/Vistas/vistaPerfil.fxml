@@ -34,7 +34,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="returnButton_profile" mnemonicParsing="false" prefHeight="40.0" prefWidth="59.0" text="&lt;-" />
+                              <Button fx:id="returnButton_profile" mnemonicParsing="false" prefHeight="40.0" prefWidth="59.0" styleClass="back-button" text="←" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Mi perfil" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
@@ -120,21 +120,21 @@
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label styleClass="form-label" text="Nueva Contraseña" />
-                                    <TextField fx:id="nicknameField_profile" />
+                                    <TextField fx:id="nicknameField_profile" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" promptText="**********" />
                                     <Label fx:id="passwordError" styleClass="error-label" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                  <children>
                                     <Label styleClass="form-label" text="Nuevo correo electrónico" />
-                                    <TextField fx:id="mailField_profile" />
+                                    <TextField fx:id="mailField_profile" promptText="ej.: pepito2@gmail.com" />
                                     <Label fx:id="mailError" styleClass="error-label" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                  <children>
                                     <Label styleClass="form-label" text="Nueva fecha de nacimiento" />
-                                    <DatePicker fx:id="datePicker_profile" />
+                                    <DatePicker fx:id="datePicker_profile" promptText="07/06/2006" />
                                     <Label fx:id="dateError" styleClass="error-label" />
                                  </children>
                               </VBox>

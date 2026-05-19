@@ -31,7 +31,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="volver_historial" mnemonicParsing="false" prefHeight="43.0" prefWidth="58.0" text="&lt;-" />
+                              <Button fx:id="volver_historial" mnemonicParsing="false" prefHeight="43.0" prefWidth="58.0" styleClass="back-button" text="←" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Historial de sesiones" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
@@ -47,25 +47,25 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="143.0">
                            <children>
-                              <Label fx:id="sesionesLabel" />
+                              <Label fx:id="sesionesLabel" styleClass="stat-number" text="0" />
                               <Label text="Sesiones totales" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="188.0">
                            <children>
-                              <Label fx:id="importadasLabel" />
+                              <Label fx:id="importadasLabel" styleClass="stat-number" text="0" />
                               <Label text="Actividades importadas" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="202.0">
                            <children>
-                              <Label fx:id="visualizadasLabel" />
+                              <Label fx:id="visualizadasLabel" styleClass="stat-number" text="0" />
                               <Label text="Actividades visualizadas" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="100.0" prefWidth="189.0">
                            <children>
-                              <Label fx:id="anotacionesLabel" />
+                              <Label fx:id="anotacionesLabel" styleClass="stat-number" text="0" />
                               <Label text="Anotaciones creadas" />
                            </children>
                         </VBox>
@@ -85,7 +85,7 @@
                   </TableView>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" styleClass="danger-button" text="Cerrar sesión" />
+                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="141.0" styleClass="danger-button" text="Cerrar sesión" />
                      </children>
                   </HBox>
                </children>

@@ -365,6 +365,10 @@ S17.642,20.762,13.558,20.762z";
 .header {
 
     -fx-background-color: white;
+    
+    -fx-pref-height: 70;
+    -fx-min-height: 70;
+    -fx-max-height: 70;
 
     -fx-padding: 14 22 14 22;
 
@@ -640,4 +644,84 @@ S17.642,20.762,13.558,20.762z";
     -fx-font-size: 12px;
 
     -fx-text-fill: #64748B;
+}
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.back-button {
+
+    -fx-background-color: white;
+
+    -fx-border-color: #C4B5FD;
+
+    -fx-border-width: 2;
+
+    -fx-text-fill: #4C1D95;
+
+    -fx-font-size: 18px;
+
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 100;
+
+    -fx-border-radius: 100;
+
+    -fx-cursor: hand;
+
+    -fx-pref-width: 42;
+    -fx-pref-height: 42;
+
+    -fx-padding: 0;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0,0,0,0.08),
+        8,
+        0.1,
+        0,
+        2
+    );
+}
+
+.back-button:hover {
+
+    -fx-background-color: #7C3AED;
+
+    -fx-text-fill: white;
+
+    -fx-border-color: #7C3AED;
+}
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.close-button {
+
+    -fx-background-color: transparent;
+
+    -fx-text-fill: #64748B;
+
+    -fx-font-size: 20px;
+
+    -fx-font-weight: bold;
+
+    -fx-cursor: hand;
+
+    -fx-background-radius: 100;
+
+    -fx-border-radius: 100;
+
+    -fx-pref-width: 36;
+    -fx-pref-height: 36;
+
+    -fx-padding: 0;
+}
+
+.close-button:hover {
+
+    -fx-background-color: #FEE2E2;
+
+    -fx-text-fill: #DC2626;
 }

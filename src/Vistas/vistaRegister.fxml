@@ -31,7 +31,7 @@
                     </rowConstraints>
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="app-title" text="SaforRun" textAlignment="RIGHT" wrappingWidth="136.19928359985352" GridPane.columnIndex="1" />
-                        <Button mnemonicParsing="false" text="&lt;-" />
+                        <Button mnemonicParsing="false" styleClass="back-button" text="←" />
                         <ImageView fitHeight="150.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true" styleClass="logo" GridPane.columnIndex="2" />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="logo" GridPane.columnIndex="2">
                            <image>
