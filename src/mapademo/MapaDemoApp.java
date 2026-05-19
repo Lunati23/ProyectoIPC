@@ -4,13 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MapaDemoApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-<<<<<<< actividad
         stage.setTitle("SaforRun");
 
         stage.getIcons().add(
@@ -20,7 +20,6 @@ public class MapaDemoApp extends Application {
         cargarVista("/Vistas/vistaLogin.fxml", stage);
 
        
->>>>>>> master
     }
 
     public static void main(String[] args) {
