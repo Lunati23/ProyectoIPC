@@ -71,16 +71,16 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <TableView prefHeight="234.0" prefWidth="667.0">
+                  <TableView fx:id="tableView_historial" prefHeight="234.0" prefWidth="667.0">
                     <columns>
-                      <TableColumn prefWidth="78.66668450832367" text="Fecha" />
-                      <TableColumn prefWidth="68.66663360595703" text="Inicio" />
-                        <TableColumn prefWidth="67.3333740234375" text="Fin" />
-                        <TableColumn prefWidth="70.00004577636719" text="Duración" />
-                        <TableColumn prefWidth="80.66668701171875" text="Tiempo" />
-                        <TableColumn prefWidth="116.0" text="Act. Importadas" />
-                        <TableColumn prefWidth="76.00003051757812" text="Act. Vistas" />
-                        <TableColumn prefWidth="111.33327229817712" text="Anotaciones" />
+                      <TableColumn fx:id="fechaColumn" prefWidth="78.66668450832367" text="Fecha" />
+                      <TableColumn fx:id="inicioColumn" prefWidth="68.66663360595703" text="Inicio" />
+                        <TableColumn fx:id="finColumn" prefWidth="67.3333740234375" text="Fin" />
+                        <TableColumn fx:id="duracionColumn" prefWidth="70.00004577636719" text="Duración" />
+                        <TableColumn fx:id="tiempoColumn" prefWidth="80.66668701171875" text="Tiempo" />
+                        <TableColumn fx:id="importadasColumn" prefWidth="116.0" text="Act. Importadas" />
+                        <TableColumn fx:id="vistasColumn" prefWidth="76.00003051757812" text="Act. Vistas" />
+                        <TableColumn fx:id="anotacionesColumn" prefWidth="111.33327229817712" text="Anotaciones" />
                     </columns>
                   </TableView>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">

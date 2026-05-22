@@ -73,7 +73,7 @@ public class VistaLoginController implements Initializable {
                 Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
                 
                 MapaDemoApp.cargarVista(
-                        "/Vistas/Principal.fxml", 
+                        "/Vistas/vistaPrincipal.fxml", 
                         stage
                 );
             } catch (Exception e) {
