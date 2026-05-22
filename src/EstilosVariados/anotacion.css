@@ -1,0 +1,41 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 22 may 2026, 22:28:14
+    Author     : paola
+*/
+
+
+.color-picker-custom {
+    -fx-background-color: white;
+    -fx-border-color: #C4B5FD; 
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 4 8 4 8;
+    -fx-cursor: hand;
+}
+
+.color-picker-custom:focused {
+    -fx-border-color: #7C3AED;
+    -fx-border-width: 2;
+}
+
+.color-picker-custom > .color-picker-label {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1E1B4B; 
+    -fx-font-size: 14px;
+}
+
+.color-picker-custom .color-rect {
+    -fx-background-radius: 4;
+    -fx-stroke: #E9E5FF;
+}
+
+.color-picker-custom .arrow-button {
+    -fx-background-color: transparent;
+}
+.color-picker-custom .arrow {
+    -fx-background-color: #7C3AED;
+}
