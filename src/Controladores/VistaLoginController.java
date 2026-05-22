@@ -17,6 +17,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mapademo.MapaDemoApp;
 
+import upv.ipc.sportlib.User; 
+import upv.ipc.sportlib.SportActivityApp;
+
 /**
  * FXML Controller class
  *
@@ -42,11 +45,46 @@ public class VistaLoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
+        nickname_error.setText("");
+        password_error.setText("");
+        
+        button_login.setOnAction(this::iniciarSesion);
+        linkRegistro.setOnAction(this::irRegistro);
+    }
     
-        @FXML
+    @FXML
+    private void iniciarSesion(ActionEvent event) {
+        nickname_error.setText("");
+        password_error.setText("");
+
+        String nickname = nickname_login.getText().trim();
+        String password = password_login.getText();
+
+        if (nickname.isEmpty() || password.isEmpty()) {
+            password_error.setText("Por favor, rellena ambos campos.");
+            return;
+        }
+
+        SportActivityApp app = SportActivityApp.getInstance();
+        boolean exito = app.login(nickname, password);
+
+        if (exito) {
+            try {
+                Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                
+                MapaDemoApp.cargarVista(
+                        "/Vistas/Principal.fxml", 
+                        stage
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            password_error.setText("Usuario o contraseña incorrectos.");
+        }
+    }
+    
+    @FXML
     private void irRegistro(ActionEvent event) {
 
         try {
