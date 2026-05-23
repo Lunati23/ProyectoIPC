@@ -416,10 +416,10 @@ public class VisualizarActividadController implements Initializable {
             mapPane.getChildren().removeIf(nodo -> "nodoTemporalUX".equals(nodo.getId()));
             return;
         }
+        Point2D puntoLocal = mapPane.sceneToLocal(event.getSceneX(), event.getSceneY());
 
-        // Coordenadas quitando zoom
-        double xReal = event.getX() / zoomGroup.getScaleX();
-        double yReal = event.getY() / zoomGroup.getScaleY();
+        double xReal = puntoLocal.getX();
+        double yReal = puntoLocal.getY();
 
         onMapRightClick(xReal, yReal);
     }
@@ -434,8 +434,8 @@ public class VisualizarActividadController implements Initializable {
         if (primerClickX != -1 && primerClickY != -1) {
             event.consume();
 
-            double segundoClickX = event.getX() / zoomGroup.getScaleX();
-            double segundoClickY = event.getY() / zoomGroup.getScaleY();
+            double segundoClickX = event.getX();
+            double segundoClickY = event.getY();
 
             // Quitar puntos de guía visual de la pantalla y cursor default en lugar de X
             mapPane.setCursor(javafx.scene.Cursor.DEFAULT);
