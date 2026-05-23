@@ -82,7 +82,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="74.0" prefWidth="850.0">
                      <children>
-                        <Button fx:id="button_login" mnemonicParsing="false" prefHeight="37.0" prefWidth="314.0" text="Iniciar sesión" />
+                        <Button fx:id="button_login" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="314.0" text="Iniciar sesión" />
                      </children>
                   </HBox>
                </children>

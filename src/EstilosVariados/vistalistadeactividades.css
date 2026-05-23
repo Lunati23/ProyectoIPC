@@ -1,0 +1,10 @@
+/* SOLO COSAS ESPECÍFICAS DE ESTA VISTA */
+
+.toolbar {
+    -fx-spacing: 10;
+    -fx-padding: 10 0 10 0;
+}
+
+.activity-container {
+    -fx-padding: 10;
+}

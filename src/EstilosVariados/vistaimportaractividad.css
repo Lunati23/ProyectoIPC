@@ -1,0 +1,9 @@
+.drop-zone {
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+    -fx-background-radius: 10;
+}
+
+.preview-box {
+    -fx-padding: 15;
+}

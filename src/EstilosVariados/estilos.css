@@ -1,111 +1,46 @@
-/*
- * Copyright (c) 2014, Oracle and/or its affiliates.
- * All rights reserved. Use is subject to license terms.
- *
- * This file is available and licensed under the following license:
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *  - Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  - Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the distribution.
- *  - Neither the name of Oracle Corporation nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-/*******************************************************************************
- *                                                                             *
- * Embedded Styling                                                            *
- *                                                                             *
- ******************************************************************************/
+/* =========================================================
+   GLOBAL.CSS - TEMA BASE (MORADO / RUNNING APP)
+   =========================================================
+   🔥 CAMBIO DE TEMA: SOLO EDITA LA SECCIÓN "PALETA"
+   ========================================================= */
 
 
-
-/*******************************************************************************
- *                                                                             *
- * High Contrast Theme                                                         *
- *                                                                             *
- ******************************************************************************/
-
-.contrast {
-    -app-color-hi: #5bf900;
-    -app-color-lo: black;
-    -app-hover: #666666;
-    -fx-background-color: -app-color-lo;
-}
-
-/*-------------------------- map pin ------------------------- */
-
-.map-pin {
-    -fx-shape: "M13.558,0C6.07,0,0,6.07,0,13.558s13.558,22.346,13.558,22.346s13.558-14.858,13.558-22.346S21.045,0,13.558,0z
-M13.558,20.762c-4.084,0-7.395-3.311-7.395-7.395s3.311-7.395,7.395-7.395c4.084,0,7.396,3.311,7.396,7.395
-S17.642,20.762,13.558,20.762z";    
-    -fx-background-color: black, white;
-    -fx-background-insets: 0, 2;
-    -fx-effect: dropshadow( two-pass-box, rgba(0, 0, 0, 0.5), 10, 0.0, 0, 10 );
-    -fx-pref-width: 48;
-    -fx-pref-height: 60;
-}
-.map-pin .arrow-button .arrow {
-    -fx-padding: 0;
-}
-
-/* =========================
-   GLOBAL.CSS
-   Tema Morado + Azul
-   Regla 70 / 20 / 10
-   ========================= */
-
-/*
-70% → fondos neutros claros
-20% → morado principal
-10% → azul acento
-*/
-
-/* ---------- ROOT ---------- */
+/* =========================================================
+   🎨 PALETA GLOBAL (CAMBIA AQUÍ TODO EL TEMA)
+   ========================================================= */
 
 .root {
+
     -fx-font-family: "Segoe UI";
+
+    /* =========================
+       🎯 COLOR PRINCIPAL (CAMBIA TEMA AQUÍ)
+       ========================= */
+
+    -fx-primary: #7C3AED;         /* 🔥 MORADO PRINCIPAL */
+    -fx-primary-hover: #6D28D9;   /* MORADO OSCURO */
+
+    /* 🟢 SI QUIERES TEMA VERDE:
+       cambia SOLO estas 2 líneas:
+       -fx-primary: #46940E;
+       -fx-primary-hover: #3C7E0C;
+    */
+
+    -fx-accent: #3B82F6;
+    -fx-danger: #EF4444;
+
     -fx-background-color: #F5F7FF;
+    -fx-surface: #FFFFFF;
+    -fx-border: #DDD6FE;
 
-    /* PALETA PRINCIPAL */
-    primary-color: #7C3AED;       /* morado */
-    primary-hover: #6D28D9;
-
-    accent-color: #3B82F6;        /* azul */
-    accent-hover: #2563EB;
-
-    background-color: #F5F7FF;
-    surface-color: #FFFFFF;
-
-    border-color: #D8D4FE;
-
-    text-color: #1E1B4B;
-    text-secondary: #64748B;
-
-    success-color: #22C55E;
-    warning-color: #F59E0B;
-    danger-color: #EF4444;
+    -fx-text: #1E1B4B;
+    -fx-text-secondary: #64748B;
 }
 
-/* ---------- GENERAL ---------- */
+
+/* =========================================================
+   🔤 TEXTOS BASE
+   ========================================================= */
 
 .label {
     -fx-text-fill: #1E1B4B;
@@ -129,24 +64,28 @@ S17.642,20.762,13.558,20.762z";
     -fx-text-fill: #64748B;
 }
 
-/* ---------- BUTTONS ---------- */
+.highlight-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b2b2b;
+}
+
+
+/* =========================================================
+   🔘 BOTONES BASE
+   ========================================================= */
 
 .button {
     -fx-background-color: #7C3AED;
     -fx-text-fill: white;
-
-    -fx-font-size: 14px;
     -fx-font-weight: bold;
-
-    -fx-background-radius: 12;
-    -fx-border-radius: 12;
-
-    -fx-padding: 10 20 10 20;
-
+    -fx-font-size: 14px;
     -fx-cursor: hand;
+    -fx-background-radius: 10;
 }
 
 .button:hover {
+    /* 🔥 IMPORTANTE: NO blanco */
     -fx-background-color: #6D28D9;
 }
 
@@ -155,7 +94,10 @@ S17.642,20.762,13.558,20.762z";
     -fx-scale-y: 0.98;
 }
 
-/* ---------- ACCENT BUTTON ---------- */
+
+/* =========================================================
+   🟦 BOTÓN ACCENT
+   ========================================================= */
 
 .accent-button {
     -fx-background-color: #3B82F6;
@@ -166,7 +108,10 @@ S17.642,20.762,13.558,20.762z";
     -fx-background-color: #2563EB;
 }
 
-/* ---------- SECONDARY BUTTON ---------- */
+
+/* =========================================================
+   ⚪ BOTÓN SECUNDARIO
+   ========================================================= */
 
 .secondary-button {
     -fx-background-color: #EDE9FE;
@@ -177,28 +122,35 @@ S17.642,20.762,13.558,20.762z";
     -fx-background-color: #DDD6FE;
 }
 
-/* ---------- DANGER BUTTON ---------- */
+
+/* =========================================================
+   🔴 BOTÓN DANGER
+   ========================================================= */
 
 .danger-button {
     -fx-background-color: #EF4444;
     -fx-text-fill: white;
 }
 
-/* ---------- INPUTS ---------- */
+.danger-button:hover {
+    -fx-background-color: #DC2626;
+}
+
+
+/* =========================================================
+   📦 INPUTS
+   ========================================================= */
 
 .text-field,
 .password-field,
 .text-area,
 .combo-box {
+
     -fx-background-color: white;
-
     -fx-border-color: #C4B5FD;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
-
-    -fx-padding: 10;
-
-    -fx-font-size: 14px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8;
 }
 
 .text-field:focused,
@@ -209,519 +161,114 @@ S17.642,20.762,13.558,20.762z";
     -fx-border-width: 2;
 }
 
-/* ---------- CARDS ---------- */
+
+/* =========================================================
+   📁 CARDS
+   ========================================================= */
 
 .card {
     -fx-background-color: white;
-
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-
-    -fx-padding: 20;
-
+    -fx-background-radius: 16;
+    -fx-padding: 16;
     -fx-border-color: #E9E5FF;
-
-    -fx-effect: dropshadow(
-        gaussian,
-        rgba(124,58,237,0.12),
-        18,
-        0.1,
-        0,
-        3
-        );
 }
 
-/* ---------- SIDEBAR ---------- */
 
-.sidebar {
-    -fx-background-color: #4C1D95;
-    -fx-padding: 20;
+/* =========================================================
+   📊 SIDEBAR
+   ========================================================= */
+
+.side-bar {
+    -fx-background-color: #7C3AED; /* 🔥 CAMBIA AQUÍ A VERDE SI QUIERES */
 }
 
-.sidebar .label {
-    -fx-text-fill: white;
+.side-item {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
 }
 
-/* ---------- TOOLBAR ---------- */
+.side-item Text {
+    -fx-fill: white;
+    -fx-font-size: 14px;
+}
 
-.toolbar {
+.side-item:hover {
+    -fx-background-color: #6D28D9;
+}
+
+.side-item-selected {
+    -fx-background-color: #5B21B6;
+}
+
+.side-item-selected Text {
+    -fx-fill: white;
+    -fx-font-weight: bold;
+}
+
+
+/* =========================================================
+   🧭 HEADER
+   ========================================================= */
+
+.header {
     -fx-background-color: white;
-
-    -fx-padding: 12 20 12 20;
-
     -fx-border-color: #DDD6FE;
     -fx-border-width: 0 0 1 0;
 }
 
-/* ---------- LISTS ---------- */
 
-.list-view {
+/* =========================================================
+   📋 ACTIVITIES
+   ========================================================= */
+
+.activity-item {
     -fx-background-color: white;
-
-    -fx-border-color: #DDD6FE;
-    -fx-border-radius: 12;
-
-    -fx-background-radius: 12;
+    -fx-cursor: hand;
 }
 
-.list-cell {
-    -fx-padding: 10;
-}
-
-.list-cell:selected {
-    -fx-background-color: #EDE9FE;
-    -fx-text-fill: #4C1D95;
-}
-
-/* ---------- TABLE ---------- */
-
-.table-view {
-    -fx-background-color: white;
-
-    -fx-border-color: #DDD6FE;
-    -fx-border-radius: 12;
-}
-
-.table-view .column-header {
+.activity-item:hover {
     -fx-background-color: #F3F0FF;
 }
 
-.table-row-cell:selected {
+.activity-item-selected {
     -fx-background-color: #EDE9FE;
 }
 
-/* ---------- MAP ---------- */
-
-.map-container {
-    -fx-background-color: white;
-
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-
-    -fx-border-color: #DDD6FE;
-}
-
-/* ---------- CHART ---------- */
-
-.chart-container {
-    -fx-background-color: white;
-
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-
-    -fx-padding: 16;
-
-    -fx-border-color: #DDD6FE;
-}
-
-/* ---------- DIALOG ---------- */
-
-.dialog-pane {
-    -fx-background-color: white;
-}
-
-.dialog-pane .header-panel {
-    -fx-background-color: #7C3AED;
-}
-
-.dialog-pane .header-panel .label {
-    -fx-text-fill: white;
-
-    -fx-font-size: 18px;
+.activity-title {
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
-}
-
-/* ---------- SCROLL ---------- */
-
-.scroll-pane {
-    -fx-background-color: transparent;
-}
-
-.scroll-pane > .viewport {
-    -fx-background-color: transparent;
-}
-
-/* ---------- TOOLTIP ---------- */
-
-.tooltip {
-    -fx-background-color: #312E81;
-    -fx-text-fill: white;
-
-    -fx-background-radius: 10;
-
-    -fx-padding: 8;
-}
-
-/* ---------- SEPARATORS ---------- */
-
-.separator .line {
-    -fx-border-color: #DDD6FE;
-}
-
-/* =========================================================
-   HEADER / TOPBAR
-   ========================================================= */
-
-.header {
-
-    -fx-background-color: white;
-    
-    -fx-pref-height: 70;
-    -fx-min-height: 70;
-    -fx-max-height: 70;
-
-    -fx-padding: 14 22 14 22;
-
-    -fx-spacing: 15;
-
-    -fx-alignment: CENTER_LEFT;
-
-    -fx-border-color: #DDD6FE;
-
-    -fx-border-width: 0 0 1 0;
-
-    -fx-effect: dropshadow(
-        gaussian,
-        rgba(124,58,237,0.08),
-        10,
-        0.1,
-        0,
-        1
-    );
-}
-
-/* =========================================================
-   LOGO CONTAINER
-   ========================================================= */
-
-.logo-container {
-
-    -fx-spacing: 12;
-
-    -fx-alignment: CENTER_LEFT;
-}
-
-/* =========================================================
-   LOGO IMAGE
-   ========================================================= */
-
-.logo {
-
-    -fx-fit-width: 42;
-    -fx-fit-height: 42;
-}
-
-/* =========================================================
-   APP TITLE
-   ========================================================= */
-
-.app-title {
-
-    -fx-font-size: 28px;
-
-    -fx-font-weight: bold;
-
-    -fx-text-fill: #4C1D95;
-}
-
-/* =========================================================
-   APP SUBTITLE
-   ========================================================= */
-
-.app-subtitle {
-
-    -fx-font-size: 12px;
-
-    -fx-text-fill: #64748B;
-}
-
-/* =========================================================
-   LABELS
-   ========================================================= */
-
-/* LABEL NORMAL */
-
-.label {
-
     -fx-text-fill: #1E1B4B;
-
-    -fx-font-size: 14px;
 }
 
-/* =========================================================
-   TITULO PRINCIPAL
-   ========================================================= */
-
-.title {
-
-    -fx-font-size: 30px;
-
-    -fx-font-weight: bold;
-
-    -fx-text-fill: #4C1D95;
-}
-
-/* =========================================================
-   SUBTITULO
-   ========================================================= */
-
-.subtitle {
-
-    -fx-font-size: 18px;
-
-    -fx-font-weight: bold;
-
-    -fx-text-fill: #5B21B6;
-}
-
-/* =========================================================
-   LABEL FORMULARIOS
-   Ej: Usuario, Contraseña...
-   ========================================================= */
-
-.form-label {
-
-    -fx-font-size: 14px;
-
-    -fx-font-weight: bold;
-
-    -fx-text-fill: #312E81;
-}
-
-/* =========================================================
-   TEXTO PEQUEÑO
-   ========================================================= */
-
-.small-text {
-
+.activity-sub {
     -fx-font-size: 12px;
-
-    -fx-text-fill: #64748B;
+    -fx-text-fill: #666;
 }
+
 
 /* =========================================================
-   TEXTO SECUNDARIO
+   🧩 DROP ZONE IMPORTACIÓN
    ========================================================= */
 
-.secondary-text {
-
-    -fx-font-size: 13px;
-
-    -fx-text-fill: #94A3B8;
-}
-
-/* =========================================================
-   LABEL DESTACADO
-   ========================================================= */
-
-.highlight-label {
-
-    -fx-font-size: 15px;
-
-    -fx-font-weight: bold;
-
-    -fx-text-fill: #7C3AED;
-}
-
-/* =========================================================
-   LABEL ERROR
-   ========================================================= */
-
-.error-label {
-
-    -fx-font-size: 12px;
-
-    -fx-font-weight: bold;
-
-    -fx-text-fill: #EF4444;
-}
-
-/* =========================================================
-   LABEL EXITO
-   ========================================================= */
-
-.success-label {
-
-    -fx-font-size: 12px;
-
-    -fx-font-weight: bold;
-
-    -fx-text-fill: #22C55E;
-}
-
-/* =========================================================
-   LABEL ESTADISTICAS
-   ========================================================= */
-
-.stat-label {
-
-    -fx-font-size: 13px;
-
-    -fx-text-fill: #64748B;
-}
-
-/* =========================================================
-   NUMEROS GRANDES
-   ========================================================= */
-
-.stat-number {
-
-    -fx-font-size: 28px;
-
-    -fx-font-weight: bold;
-
-    -fx-text-fill: #4C1D95;
-}
-
-/* =========================================================
-   HEADER / TOPBAR
-   ========================================================= */
-
-.header {
-
-    -fx-background-color: white;
-
-    -fx-padding: 14 22 14 22;
-
-    -fx-spacing: 15;
-
-    -fx-alignment: CENTER_LEFT;
-
-    -fx-border-color: #DDD6FE;
-
-    -fx-border-width: 0 0 1 0;
-
-    -fx-effect: dropshadow(
-        gaussian,
-        rgba(124,58,237,0.08),
-        10,
-        0.1,
-        0,
-        1
-    );
-}
-
-/* =========================================================
-   LOGO CONTAINER
-   ========================================================= */
-
-.logo-container {
-
-    -fx-spacing: 12;
-
-    -fx-alignment: CENTER_LEFT;
-}
-
-/* =========================================================
-   LOGO IMAGE
-   ========================================================= */
-
-.logo {
-
-    -fx-fit-width: 42;
-    -fx-fit-height: 42;
-}
-
-/* =========================================================
-   APP TITLE
-   ========================================================= */
-
-.app-title {
-
-    -fx-font-size: 28px;
-
-    -fx-font-weight: bold;
-
-    -fx-text-fill: #4C1D95;
-}
-
-/* =========================================================
-   APP SUBTITLE
-   ========================================================= */
-
-.app-subtitle {
-
-    -fx-font-size: 12px;
-
-    -fx-text-fill: #64748B;
-}
-/* =========================================================
-   BACK BUTTON
-   ========================================================= */
-
-.back-button {
-
-    -fx-background-color: white;
-
-    -fx-border-color: #C4B5FD;
-
-    -fx-border-width: 2;
-
-    -fx-text-fill: #4C1D95;
-
-    -fx-font-size: 18px;
-
-    -fx-font-weight: bold;
-
-    -fx-background-radius: 100;
-
-    -fx-border-radius: 100;
-
-    -fx-cursor: hand;
-
-    -fx-pref-width: 42;
-    -fx-pref-height: 42;
-
-    -fx-padding: 0;
-
-    -fx-effect: dropshadow(
-        gaussian,
-        rgba(0,0,0,0.08),
-        8,
-        0.1,
-        0,
-        2
-    );
-}
-
-.back-button:hover {
-
-    -fx-background-color: #7C3AED;
-
-    -fx-text-fill: white;
-
+.drop-zone {
+    -fx-background-color: #ffffff;
     -fx-border-color: #7C3AED;
+    -fx-border-width: 2;
+    -fx-border-style: dashed;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
 }
 
-/* =========================================================
-   CLOSE BUTTON
-   ========================================================= */
+.drop-zone:hover {
+    -fx-background-color: #F3F0FF;
+}
 
-.close-button {
-
-    -fx-background-color: transparent;
-
-    -fx-text-fill: #64748B;
-
-    -fx-font-size: 20px;
-
+.drop-text {
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
-
-    -fx-cursor: hand;
-
-    -fx-background-radius: 100;
-
-    -fx-border-radius: 100;
-
-    -fx-pref-width: 36;
-    -fx-pref-height: 36;
-
-    -fx-padding: 0;
 }
 
-.close-button:hover {
-
-    -fx-background-color: #FEE2E2;
-
-    -fx-text-fill: #DC2626;
+.drop-text-secondary {
+    -fx-font-size: 12px;
+    -fx-text-fill: #777;
 }

@@ -1,7 +1,24 @@
-/*
- * Empty Stylesheet file.
- */
+/* =========================================================
+   PRINCIPAL.CSS
+   ⚠️ DEBE ESTAR VACÍO O CASI VACÍO
+   Solo usarlo si hay ajustes MUY específicos de layout
+   ========================================================= */
 
-.mainFxmlClass {
-    
+
+/* ❌ NO definir colores aquí */
+/* ❌ NO redefinir botones */
+/* ❌ NO redefinir hover */
+/* ❌ NO duplicar estilos del global */
+
+
+/* =========================================================
+   SOLO CASOS EXCEPCIONALES (OPCIONAL)
+   ========================================================= */
+
+/*
+Ejemplo si necesitas algo MUY específico de esta pantalla:
+
+.content-area {
+    -fx-padding: 30;
 }
+*/
