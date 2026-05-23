@@ -7,14 +7,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MapaDemoApp extends Application {
-
+    
     @Override
     public void start(Stage stage) throws Exception {
+        
+        
         cargarVista("/Vistas/VisualizarActividad.fxml", stage);
 
         stage.setTitle("SaforRun");
        
     }
+    
+
 
     public static void main(String[] args) {
         launch(args);
@@ -32,5 +36,7 @@ public class MapaDemoApp extends Application {
         stage.setResizable(false);
         stage.show();
     }
+    
+    
 }
 

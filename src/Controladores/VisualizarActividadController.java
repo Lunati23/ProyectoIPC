@@ -30,8 +30,8 @@ package Controladores;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -42,11 +42,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -54,16 +50,14 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -162,8 +156,6 @@ public class VisualizarActividadController implements Initializable {
     @FXML
     private Label mousePosition;
     @FXML
-    private SplitPane splitPane;
-    @FXML
     private Label nombreActividadLabel;
     @FXML
     private Label distancia;
@@ -186,6 +178,12 @@ public class VisualizarActividadController implements Initializable {
     
     private MapProjection proyeccionMapa;
 
+    // Para 2 puntos en modo CIRCLE y LINE 
+    private AnnotationType tipoCapturaActual = null;
+    private double primerClickX = -1;
+    private double primerClickY = -1;
+    
+ 
     // =========================================================
     //  MANEJADORES DE ZOOM
     // =========================================================
@@ -268,15 +266,18 @@ public class VisualizarActividadController implements Initializable {
     
     @FXML
     void listClicked(MouseEvent event) {
-        // Obtenemos el POI seleccionado; si no hay ninguno, salimos
+        // Obtenemos la anotacion seleccionada; si no hay ninguno, salimos
         Annotation itemSelected = map_listview.getSelectionModel().getSelectedItem();
         if (itemSelected == null) return;
+        if (itemSelected.getGeoPoints() == null || itemSelected.getGeoPoints().isEmpty()) {
+            return;
+        }
 
         // ── Dimensiones del mapa con el zoom actual aplicado ──────────
         double mapWidth  = mapPane.getWidth()  * zoomGroup.getScaleX();
         double mapHeight = mapPane.getHeight() * zoomGroup.getScaleY();
 
-        // ── Posición del POI escalada ──────────────────────────────────
+        // ── Posición escalada ──────────────────────────────────
         // 1. Proyectamos el GeoPoint de la marca a píxeles X e Y reales en la pantalla
         Point2D posPixel = proyeccionMapa.project(itemSelected.getGeoPoints().get(0));
         // getPosition() devuelve las coordenadas en el sistema local del
@@ -355,7 +356,7 @@ public class VisualizarActividadController implements Initializable {
         // ── Manejador de clics sobre el mapa ──────────────────────────
         // Gestionamos el clic derecho (menú contextual) y el clic izquierdo
         // en modo inserción (FIX 2).
-        mapPane.setOnMouseClicked(e -> {
+        /*mapPane.setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.SECONDARY) {
                 // Clic derecho → mostrar menú contextual
                 onMapRightClick(e.getX(), e.getY());
@@ -369,6 +370,18 @@ public class VisualizarActividadController implements Initializable {
                 
             }
         });
+        */
+        mapPane.setOnMouseClicked(e -> {
+            if (e.getButton() == MouseButton.SECONDARY) {
+                e.consume(); // Evita interferencias con el scroll
+                // click derecho manejador
+                clickDerecho(e);
+            } else if (e.getButton() == MouseButton.PRIMARY) {
+                // click izquierdo manejador
+                clickIzquierdo(e);
+            }
+        });
+        
 
         // ── Jerarquía de Groups para el zoom ──────────────────────────
         // contentGroup es el nodo raíz que recibe el ScrollPane.
@@ -388,6 +401,65 @@ public class VisualizarActividadController implements Initializable {
         map_scrollpane.setContent(contentGroup);
 
     }
+    
+    // =========================================================
+    //  CLICK DERECHO - manejador
+    // =========================================================
+    
+    private void clickDerecho(MouseEvent event) {
+        // Si se estaban capturando 2 clics y se pulsa click derecho, cancelamos
+        if (primerClickX != -1) {
+            primerClickX = -1;
+            primerClickY = -1;
+            tipoCapturaActual = null;
+            mapPane.setCursor(javafx.scene.Cursor.DEFAULT);
+            mapPane.getChildren().removeIf(nodo -> "nodoTemporalUX".equals(nodo.getId()));
+            return;
+        }
+
+        // Coordenadas quitando zoom
+        double xReal = event.getX() / zoomGroup.getScaleX();
+        double yReal = event.getY() / zoomGroup.getScaleY();
+
+        onMapRightClick(xReal, yReal);
+    }
+    
+    // =========================================================
+    //  CLICK IZQUIERDO - manejador
+    // =========================================================
+
+    
+    private void clickIzquierdo(MouseEvent event) {
+        // Si hay un primer clic guardado, significa que este es el segundo click
+        if (primerClickX != -1 && primerClickY != -1) {
+            event.consume();
+
+            double segundoClickX = event.getX() / zoomGroup.getScaleX();
+            double segundoClickY = event.getY() / zoomGroup.getScaleY();
+
+            // Quitar puntos de guía visual de la pantalla y cursor default en lugar de X
+            mapPane.setCursor(javafx.scene.Cursor.DEFAULT);
+            mapPane.getChildren().removeIf(nodo -> "nodoTemporalUX".equals(nodo.getId()));
+
+            // Guardar primer click y tipo anotacion
+            double x1 = primerClickX;
+            double y1 = primerClickY;
+            AnnotationType tipoAnotacion = tipoCapturaActual;
+
+            // Reseteamos al primer click = -1 y anotacion nula , para proxima anotacion
+            primerClickX = -1;
+            primerClickY = -1;
+            tipoCapturaActual = null;
+
+            // Abrimos ventana de anotacion despues de guardar los clicks
+            abrirVentanaAnotacion(x1, y1, segundoClickX, segundoClickY, tipoAnotacion);
+
+        } else if (insertionMode) {
+            insertionMode = false;
+            mapPane.setStyle(""); // Restauramos el cursor normal
+        }
+    }
+    
 
     // =========================================================
     //  MENÚ CONTEXTUAL (clic derecho sobre el mapa)
@@ -410,10 +482,14 @@ public class VisualizarActividadController implements Initializable {
         // Usamos variables final para que el lambda pueda capturarlas.
         final double clickX = x;
         final double clickY = y;
-        mapContextMenu.getItems().get(0).setOnAction(e -> abrirVentanaAnotacion(clickX, clickY, AnnotationType.POINT));
-        mapContextMenu.getItems().get(1).setOnAction(e -> abrirVentanaAnotacion(clickX, clickY, AnnotationType.CIRCLE));
-        mapContextMenu.getItems().get(2).setOnAction(e -> abrirVentanaAnotacion(clickX, clickY, AnnotationType.TEXT));
-        mapContextMenu.getItems().get(3).setOnAction(e -> abrirVentanaAnotacion(clickX, clickY, AnnotationType.LINE));
+        // punto - no hace falta segundo click, directamente abre ventana
+        mapContextMenu.getItems().get(0).setOnAction(e -> abrirVentanaAnotacion(x, y, -1, -1, AnnotationType.POINT));
+        // circulo - prepara para segundo click
+        mapContextMenu.getItems().get(1).setOnAction(e -> segundoClick(clickX, clickY, AnnotationType.CIRCLE));
+        // texto - no hace falta segundo click, directamente abre ventana
+        mapContextMenu.getItems().get(2).setOnAction(e -> abrirVentanaAnotacion(x, y, -1, -1, AnnotationType.TEXT));
+        // linea - prepara para segundo click
+        mapContextMenu.getItems().get(3).setOnAction(e -> segundoClick(clickX, clickY, AnnotationType.LINE));
 
         // Mostramos el menú en coordenadas de pantalla
         mapContextMenu.show(
@@ -421,6 +497,33 @@ public class VisualizarActividadController implements Initializable {
             mapPane.localToScreen(x, y).getX(),
             mapPane.localToScreen(x, y).getY()
         );
+    }
+    
+    // =========================================================
+    //  INDICA QUE SE ESPERA EL SEGUNDO CLICK
+    // =========================================================
+    
+    private void segundoClick(double x, double y, AnnotationType a) {
+        this.tipoCapturaActual = a;
+        this.primerClickX = x;
+        this.primerClickY = y;
+        // Cursor en X
+        mapPane.setCursor(javafx.scene.Cursor.CROSSHAIR); 
+        colocarPuntoGuiaTemporal(x, y);
+    }
+    
+    // =========================================================
+    //  PUNTO DONDE SE HIZO PRIMER CLICK PARA AYUDAR PARA SEGUNDO
+    // =========================================================
+
+    
+    // Método auxiliar de feedback visual
+    private void colocarPuntoGuiaTemporal(double x, double y) {
+        Circle temporal = new Circle(3, Color.BLACK);
+        temporal.setCenterX(x);
+        temporal.setCenterY(y);
+        temporal.setId("nodoTemporalUX");
+        mapPane.getChildren().add(temporal);
     }
 
     // =========================================================
@@ -456,14 +559,14 @@ public class VisualizarActividadController implements Initializable {
 
         // Los items se crean aquí sin acción; las acciones se asignan
         // en onMapRightClick() con las coordenadas correctas de cada clic.
-        MenuItem miPoint  = new MenuItem("📍 Añadir punto");      // Índice 0 -> POINT
-        MenuItem miCircle = new MenuItem("⭕ Añadir círculo");    // Índice 1 -> CIRCLE
-        MenuItem miText   = new MenuItem("📝 Añadir texto");      // Índice 2 -> TEXT
-        MenuItem miLine   = new MenuItem("➖ Añadir línea");      // Índice 3 -> LINE
+        MenuItem miPoint  = new MenuItem("📍 Añadir punto");      
+        MenuItem miCircle = new MenuItem("⭕ Añadir círculo");    
+        MenuItem miText   = new MenuItem("📝 Añadir texto");      
+        MenuItem miLine   = new MenuItem("➖ Añadir línea");      
 
         mapContextMenu = new ContextMenu(miPoint, miCircle, miText, miLine);
 
-               //  setCellFactory() define cómo se renderiza cada celda
+        //  setCellFactory() define cómo se renderiza cada celda
         //  de forma independiente al modelo Poi.
         //  Aquí mostramos "CÓDIGO – Nombre" en cada fila.
         /*
@@ -485,6 +588,7 @@ public class VisualizarActividadController implements Initializable {
         });
         */
         
+        // Cambiamos Poi por Annotation y añadimos los tipos 
         map_listview.setCellFactory(listView -> new ListCell<Annotation>() {
             @Override
             protected void updateItem(Annotation anotacion, boolean empty) {
@@ -546,6 +650,7 @@ public class VisualizarActividadController implements Initializable {
      *
      * @param event evento de acción del menú
      */
+    /*
     private void about(ActionEvent event) {
         Alert mensaje = new Alert(Alert.AlertType.INFORMATION);
 
@@ -559,7 +664,7 @@ public class VisualizarActividadController implements Initializable {
         mensaje.setHeaderText("IPC - 2026");
         mensaje.showAndWait(); // Bloquea hasta que el usuario cierra el diálogo
     }
-
+    
     // =========================================================
     //  AÑADIR UN POI (texto) AL MAPA
     // =========================================================
@@ -662,26 +767,60 @@ public class VisualizarActividadController implements Initializable {
     }
 
     // =========================================================
-    //  AÑADIR UN CÍRCULO AL MAPA
+    //  AÑADIR UN CÍRCULO
     // =========================================================
 
-    /**
-     * Dibuja un círculo rojo de radio 10 px en la posición indicada.
-     *
-     * Ejemplo sencillo de cómo añadir formas vectoriales (Shape) sobre el mapa.
-     * Los alumnos pueden extenderlo para:
-     *  - Elegir color dinámicamente.
-     *  - Asociar información al círculo (tooltip, popup, etc.).
-     *  - Permitir moverlo con arrastrar y soltar (drag and drop).
-     *
-     * @param x coordenada X en el sistema local del mapPane
-     * @param y coordenada Y en el sistema local del mapPane
-     */
-    private void addCircle(double x, double y, Color color) {
-        Circle circle = new Circle(10, color); // radio = 10 px, color = rojo
-        circle.setCenterX(x);
-        circle.setCenterY(y);
-        mapPane.getChildren().add(circle); // Se añade sobre el mapa como cualquier nodo
+    private void addCircle(double centroX, double centroY, double bordeX, double bordeY, Color color) {
+        Circle circulo = new Circle();
+        circulo.setCenterX(centroX);
+        circulo.setCenterY(centroY);
+        
+        // Calcula radio por dist cartesiana
+        double radio = Math.hypot(bordeX - centroX, bordeY - centroY);
+        circulo.setRadius(radio);
+        
+        // circulo transparente solo con borde = color picker
+        circulo.setFill(Color.TRANSPARENT);      
+        circulo.setStroke(color);                
+        circulo.setStrokeWidth(2.5);
+        
+        mapPane.getChildren().add(circulo);
+    }
+    // =========================================================
+    //  AÑADIR UN PUNTO
+    // =========================================================
+    private void addPoint(double x, double y, Color color) {
+        Circle point = new Circle(5, color); // radio = 5 px, color = rojo
+        point.setCenterX(x);
+        point.setCenterY(y);
+        mapPane.getChildren().add(point); // Se añade sobre el mapa como cualquier nodo
+    }
+    
+    // =========================================================
+    //  AÑADIR LINEA
+    // =========================================================
+    private void addLine(double startX, double startY, double endX, double endY, Color color) {
+        javafx.scene.shape.Line linea = new Line();
+        linea.setStartX(startX);
+        linea.setStartY(startY);
+        linea.setEndX(endX);
+        linea.setEndY(endY);
+        
+        linea.setStroke(color);
+        linea.setStrokeWidth(3.5);
+        
+        mapPane.getChildren().add(linea);
+    }
+    
+    // =========================================================
+    //  AÑADIR TEXTO
+    // =========================================================
+    private void addText(double x, double y, Color color, String mensaje) {
+        Text texto = new Text(mensaje); // radio = 10 px, color = rojo
+        texto.setFill(color);
+        texto.setX(x); 
+        texto.setY(y);
+        mapPane.getChildren().add(texto); // Se añade sobre el mapa como cualquier nodo
     }
     
     // =========================================================
@@ -727,13 +866,17 @@ public class VisualizarActividadController implements Initializable {
             );
 
             // Recorrido
-            pintarRutaVectorial();
+            pintarRuta();
 
             // Anotaciones previas
             cargarAnotacionesPrevias();
         }
     }
-    private void pintarRutaVectorial() {
+    // =========================================================
+    //  PINTA EL CAMINO EN EL MAPA
+    // =========================================================
+
+    private void pintarRuta() {
         if (actividadActual == null || proyeccionMapa == null) return;
 
         List<Point2D> puntosPixeles = proyeccionMapa.projectActivity(actividadActual);
@@ -753,7 +896,10 @@ public class VisualizarActividadController implements Initializable {
 
         mapPane.getChildren().add(camino);
     }
-    
+    // =========================================================
+    //  ANOTACIONES DE BASE DE DATOS - CARGAR 
+    // =========================================================
+
     
     private void cargarAnotacionesPrevias() {
         if (actividadActual == null || actividadActual.getAnnotations() == null) return;
@@ -763,47 +909,36 @@ public class VisualizarActividadController implements Initializable {
         for (Annotation anotacion : actividadActual.getAnnotations()) {
             if (anotacion.getGeoPoints() != null && !anotacion.getGeoPoints().isEmpty()) {
 
-                Point2D posPixel = proyeccionMapa.project(anotacion.getGeoPoints().get(0));
+                Point2D p1 = proyeccionMapa.project(anotacion.getGeoPoints().get(0));
 
                 Color colorMarca = Color.web(anotacion.getColor());
 
                 switch (anotacion.getType()) {
                 
-                    case POINT:
-                        Circle pin = new Circle(5, colorMarca);
-                        pin.setCenterX(posPixel.getX());
-                        pin.setCenterY(posPixel.getY());
-                        mapPane.getChildren().add(pin);
-                        break;
+                    case POINT -> {
+                        addPoint(p1.getX(), p1.getY(), colorMarca);
+                    }
 
-                    case CIRCLE:
-                        addCircle(posPixel.getX(), posPixel.getY(), colorMarca);
-                        break;
-
-                    case TEXT:
-                        Text rotulo = new Text(anotacion.getText());
-                        rotulo.setFill(colorMarca);
-                        rotulo.setX(posPixel.getX()); // Desplazamos a la derecha para que no se solape con el punto
-                        rotulo.setY(posPixel.getY());
-                        mapPane.getChildren().add(rotulo);
-                        break;
-
-                    case LINE:
-                        if (anotacion.getGeoPoints().size() >= 1) {
-                            javafx.scene.shape.Line linea = new javafx.scene.shape.Line();
-                            linea.setStartX(posPixel.getX() - 15);
-                            linea.setStartY(posPixel.getY());
-                            linea.setEndX(posPixel.getX() + 15);
-                            linea.setEndY(posPixel.getY());
-
-                            linea.setStroke(colorMarca);
-                            linea.setStrokeWidth(3.0);
-                            mapPane.getChildren().add(linea);
+                    case CIRCLE -> {
+                        if (anotacion.getGeoPoints().size() >= 2) {
+                            Point2D p2 = proyeccionMapa.project(anotacion.getGeoPoints().get(1));
+                            addCircle(p1.getX(), p1.getY(), p2.getX(), p2.getY(), colorMarca);
                         }
-                        break;
+                    }
 
-                    default:
-                        break;
+                    case TEXT -> {
+                        addText(p1.getX(), p1.getY(), colorMarca, anotacion.getText());
+                    }
+
+                    case LINE -> {
+                        if (anotacion.getGeoPoints().size() >= 2) {
+                            Point2D p2 = proyeccionMapa.project(anotacion.getGeoPoints().get(1));
+                            addLine(p1.getX(), p1.getY(), p2.getX(), p2.getY(), colorMarca);
+                        }
+                    }
+
+                    default -> {
+                    }
             
                 }
             }
@@ -814,16 +949,13 @@ public class VisualizarActividadController implements Initializable {
     //  VENTANA DE ANOTACIÓN
     // =========================================================
 
-    private void abrirVentanaAnotacion(double x, double y, AnnotationType tipo) {
+    private void abrirVentanaAnotacion(double x, double y, double x2, double y2, AnnotationType tipo) {
         if (actividadActual == null || proyeccionMapa == null) return;
-
-        // Pixel a Latitud/Longitud
-        GeoPoint puntoGeografico = proyeccionMapa.unproject(x, y);
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/AnadirAnotacion.fxml"));
             javafx.scene.Parent root = loader.load();
-            // va a otro controlador
+
             AnadirAnotacionController controladorSecundario = loader.getController();
             controladorSecundario.setTipoAnotacion(tipo);
 
@@ -832,18 +964,24 @@ public class VisualizarActividadController implements Initializable {
             stageModal.initModality(javafx.stage.Modality.APPLICATION_MODAL);
             stageModal.setScene(new javafx.scene.Scene(root));
             stageModal.setResizable(false);
-
             stageModal.showAndWait();
 
             if (controladorSecundario.isOKPressed()) {
                 Annotation anotacionTemporal = controladorSecundario.getNuevaAnotacion();
 
                 if (anotacionTemporal != null) {
-                    // Lista de puntos
-                    List<GeoPoint> listaPuntos = new java.util.ArrayList<>();
+                    List<GeoPoint> listaPuntos = new ArrayList<>();
+
+                    // Siempre hay primer punto
+                    GeoPoint puntoGeografico = proyeccionMapa.unproject(x, y);
                     listaPuntos.add(puntoGeografico);
 
-                    // Objeto anotacion
+                    // Si hay segundo punto, se desproyecta y se añade
+                    if (x2 != -1 && y2 != -1) {
+                        GeoPoint puntoGeografico2 = proyeccionMapa.unproject(x2, y2);
+                        listaPuntos.add(puntoGeografico2);
+                    }
+
                     Annotation anotacionDefinitiva = new Annotation(
                         anotacionTemporal.getType(),
                         anotacionTemporal.getText(),
@@ -852,17 +990,17 @@ public class VisualizarActividadController implements Initializable {
                         listaPuntos
                     );
 
-                    // Guardamos en base de datos
+                    // Se guarda en la base de datos 
                     SportActivityApp.getInstance().addAnnotation(actividadActual, anotacionDefinitiva);
 
-                    // Actualizamos desde base de datos
+                    // Actualisza vista con base de datos 
                     map_listview.getItems().setAll(actividadActual.getAnnotations());
 
-                    
+                    // Limpia map pane y regenera todo 
                     mapPane.getChildren().clear(); 
                     buildMap(new File(actividadActual.getSuggestedMap().getImagePath())); 
-                    pintarRutaVectorial(); 
-                    cargarAnotacionesPrevias(); // Pinta todas las marcas incluyendo la nueva
+                    pintarRuta(); 
+                    cargarAnotacionesPrevias(); 
                 }
             }
 
