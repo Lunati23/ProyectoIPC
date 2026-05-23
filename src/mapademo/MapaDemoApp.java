@@ -10,7 +10,7 @@ public class MapaDemoApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        cargarVista("/Vistas/vistaLogin.fxml", stage);
+        cargarVista("/Vistas/VisualizarActividad.fxml", stage);
 
         stage.setTitle("SaforRun");
        
