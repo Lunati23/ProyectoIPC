@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package Controladores;
 
 import java.io.File;
@@ -24,8 +20,6 @@ import upv.ipc.sportlib.SportActivityApp;
 
 /**
  * FXML Controller class
- *
- * @author marco
  */
 public class GestionDeMapasController implements Initializable {
 
@@ -38,6 +32,8 @@ public class GestionDeMapasController implements Initializable {
     @FXML
     private Label lblMapFile;
     @FXML
+    private TextField txtNombre; // ¡Variable vital añadida!
+    @FXML
     private TextField txtLatMin;
     @FXML
     private TextField txtLatmax;
@@ -48,54 +44,96 @@ public class GestionDeMapasController implements Initializable {
     @FXML
     private Button btnSaveMap;
     
-
     private File rutaImagenSeleccionada; 
 
-  
- 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        // 1. Instanciar la app (la librería mágica)
-     SportActivityApp app = SportActivityApp.getInstance(); 
-    
-    // 2. Obtener la lista de mapas registrados
-     List<MapRegion> listaMapas = app.getMapRegions(); 
-    
-    // 3. Convertirla a un formato que entienda JavaFX
-     ObservableList<MapRegion> mapasObservable = FXCollections.observableArrayList(listaMapas);
-     mapListView.setItems(mapasObservable);
-    
-    // 4. Decirle al ListView que muestre el nombre del mapa (si no, mostrará un código raro de memoria)
-     mapListView.setCellFactory(param -> new ListCell<MapRegion>() {
-         @Override
-         protected void updateItem(MapRegion map, boolean empty) {
-             super.updateItem(map, empty);
-            if (empty || map == null) {
-                setText(null);
-            } else {
-                setText(map.getName()); 
+        // 1. Instanciar la app (la librería de la asignatura)
+        SportActivityApp app = SportActivityApp.getInstance(); 
+        
+        // 2. Obtener la lista de mapas registrados
+        List<MapRegion> listaMapas = app.getMapRegions(); 
+        
+        // 3. Convertirla a un formato que entienda JavaFX
+        ObservableList<MapRegion> mapasObservable = FXCollections.observableArrayList(listaMapas);
+        mapListView.setItems(mapasObservable);
+        
+        // 4. Decirle al ListView que muestre el nombre del mapa
+        mapListView.setCellFactory(param -> new ListCell<MapRegion>() {
+            @Override
+            protected void updateItem(MapRegion map, boolean empty) {
+                super.updateItem(map, empty);
+                if (empty || map == null) {
+                    setText(null);
+                } else {
+                    setText(map.getName()); 
+                }
             }
-        }
-    });
-
+        });
     }    
+    
     @FXML
-private void buscarImagen(ActionEvent event) {
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Seleccionar imagen de mapa");
-    // Filtramos para que solo deje elegir JPGs, como pide la práctica
-    fileChooser.getExtensionFilters().add(
-        new FileChooser.ExtensionFilter("Archivos de Imagen JPG", "*.jpg", "*.jpeg")
-    );
-    
-    // Abre la ventana de selección
-    File archivoElegido = fileChooser.showOpenDialog(null);
-    
-    if (archivoElegido != null) {
-        // Si elige un archivo, guardamos la ruta y mostramos el nombre en la etiqueta
-        rutaImagenSeleccionada = archivoElegido;
-        lblMapFile.setText(archivoElegido.getName());
+    private void buscarImagen(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen de mapa");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("Archivos de Imagen JPG", "*.jpg", "*.jpeg")
+        );
+        
+        File archivoElegido = fileChooser.showOpenDialog(null);
+        
+        if (archivoElegido != null) {
+            rutaImagenSeleccionada = archivoElegido;
+            lblMapFile.setText(archivoElegido.getName());
+        }
     }
-}
+
+    @FXML
+    private void guardarMapa(ActionEvent event) {
+        if (txtNombre.getText().trim().isEmpty() || rutaImagenSeleccionada == null) {
+            System.out.println("Error: Falta el nombre o la imagen del mapa.");
+            return;
+        }
+
+        try {
+            double latMin = Double.parseDouble(txtLatMin.getText().trim());
+            double latMax = Double.parseDouble(txtLatmax.getText().trim());
+            double lonMin = Double.parseDouble(txtlonMin.getText().trim());
+            double lonMax = Double.parseDouble(txtLonMax.getText().trim());
+
+            SportActivityApp app = SportActivityApp.getInstance();
+            app.addMapRegion(txtNombre.getText().trim(), rutaImagenSeleccionada, latMin, latMax, lonMin, lonMax);
+            System.out.println("¡Mapa guardado con éxito!");
+
+            txtNombre.clear();
+            txtLatMin.clear();
+            txtLatmax.clear();
+            txtlonMin.clear();
+            txtLonMax.clear();
+            lblMapFile.setText("Ningún archivo...");
+            rutaImagenSeleccionada = null;
+
+            mapListView.setItems(FXCollections.observableArrayList(app.getMapRegions()));
+
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Las coordenadas deben ser números decimales válidos.");
+        }
+    }
+
+    @FXML
+    private void eliminarMapa(ActionEvent event) {
+        MapRegion mapaSeleccionado = mapListView.getSelectionModel().getSelectedItem();
+
+        if (mapaSeleccionado == null) {
+            System.out.println("Aviso: Selecciona un mapa de la lista para poder borrarlo.");
+            return;
+        }
+
+        SportActivityApp app = SportActivityApp.getInstance();
+        // Borrar pasándole el objeto directamente (¡corregido!)
+        app.removeMapRegion(mapaSeleccionado);
+        System.out.println("¡Mapa eliminado con éxito!");
+
+        mapListView.setItems(FXCollections.observableArrayList(app.getMapRegions()));
+    }
 }

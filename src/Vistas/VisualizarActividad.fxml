@@ -40,7 +40,7 @@
    <center>
       <VBox prefHeight="650.0" prefWidth="850.0" style="-fx-background-color: #F5F7FF;" BorderPane.alignment="CENTER">
          <children>
-            <SplitPane fx:id="splitPane" dividerPositions="0.35" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+            <SplitPane dividerPositions="0.35" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
                <items>
                   
                   <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
@@ -179,13 +179,9 @@
                   
                   <ScrollPane fx:id="map_scrollpane" hbarPolicy="ALWAYS" onMouseMoved="#showPosition" pannable="true" prefHeight="398.0" prefWidth="358.0" vbarPolicy="ALWAYS">
                      <content>
-                        <Pane>
+                        <Pane fx:id="mapPane">
                            <children>
-                              <ImageView pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../resources/upv.jpg" />
-                                 </image>
-                              </ImageView>
+                              <ImageView pickOnBounds="true" />
                            </children>
                         </Pane>
                      </content>
