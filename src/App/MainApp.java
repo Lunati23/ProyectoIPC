@@ -9,15 +9,16 @@ import upv.ipc.sportlib.SportActivityApp;
 
 public class MainApp extends Application {
 
+    private static SportActivityApp app = SportActivityApp.getInstance();
+
     private static Stage primaryStage;
 
     @Override
     public void start(Stage stage) throws Exception {
-        SportActivityApp.getInstance(); 
         primaryStage = stage;
 
         Parent root = FXMLLoader.load(
-            getClass().getResource("/Vistas/VistaLogin.fxml")
+                getClass().getResource("/Vistas/VistaLogin.fxml")
         );
 
         stage.setScene(new Scene(root));
@@ -28,12 +29,35 @@ public class MainApp extends Application {
     public static void cargarPrincipal() throws Exception {
 
         Parent root = FXMLLoader.load(
-            MainApp.class.getResource("/Vistas/VistaPrincipal.fxml")
+                MainApp.class.getResource("/Vistas/VistaPrincipal.fxml")
         );
 
         primaryStage.getScene().setRoot(root);
     }
+
+    public static void cargarRegistro() throws Exception {
+
+        Parent root = FXMLLoader.load(
+                MainApp.class.getResource("/Vistas/vistaRegister.fxml")
+        );
+
+        primaryStage.getScene().setRoot(root);
+    }
+
+    public static void cargarLogin() throws Exception {
+
+        Parent root = FXMLLoader.load(
+                MainApp.class.getResource("/Vistas/vistaLogin.fxml")
+        );
+
+        primaryStage.getScene().setRoot(root);
+    }
+
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static SportActivityApp getApp() {
+        return app;
     }
 }

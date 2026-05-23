@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import App.MainApp;
+import javafx.stage.Stage;
 import upv.ipc.sportlib.SportActivityApp;
 
 public class VistaLoginController implements Initializable {
@@ -16,12 +17,13 @@ public class VistaLoginController implements Initializable {
     @FXML
     private PasswordField password_login;
     @FXML
+    private Button button_login;
+    @FXML
     private Label nickname_error;
     @FXML
     private Label password_error;
-    @FXML
-    private Button button_login;
-
+    
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
@@ -32,17 +34,25 @@ public class VistaLoginController implements Initializable {
         String user = nickname_login.getText();
         String pass = password_login.getText();
 
-        SportActivityApp app = SportActivityApp.getInstance();
+        if (user.isEmpty() || pass.isEmpty()) {
+            password_error.setText("Por favor, rellena ambos campos.");
+            return;
+        }
 
+        SportActivityApp app = MainApp.getApp();
         boolean ok = app.login(user, pass);
 
         if (ok) {
             MainApp.cargarPrincipal(); // cambiar vista
+        } else {
+            password_error.setText("Usuario o contraseña incorrectos.");
         }
     }
 
     @FXML
-    private void irRegistro(ActionEvent event) {
-        System.out.println("Ir a registro (pendiente de implementar)");
+    private void irRegistro(ActionEvent event) throws Exception {
+        MainApp.cargarRegistro();
     }
-}
+    
+    
+}   

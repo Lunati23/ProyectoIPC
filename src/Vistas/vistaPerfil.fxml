@@ -60,7 +60,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="134.0" prefWidth="193.0">
                                  <children>
-                                    <ImageView fitHeight="120.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="logoImagen_profile" fitHeight="120.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../logos/logo_usuario.png" />
                                        </image>
@@ -69,7 +69,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Button mnemonicParsing="false" styleClass="secondary-button" text="Subir imagen" />
+                                    <Button fx:id="imagenButton_profile" mnemonicParsing="false" styleClass="secondary-button" text="Subir imagen" />
                                  </children>
                               </HBox>
                            </children>
@@ -99,7 +99,7 @@
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-area" text="Correo electrónico:" GridPane.rowIndex="1" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-area" text="Fecha de nacimiento:" GridPane.rowIndex="2" />
                               <Text fx:id="nickname_profile" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Text fx:id="correo_profile" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Text fx:id="date_profile" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>

@@ -4,7 +4,10 @@
  */
 package Controladores;
 
+import App.MainApp;
+import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,9 +17,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import mapademo.MapaDemoApp;
+
+import upv.ipc.sportlib.User;
+import upv.ipc.sportlib.SportActivityApp;
 
 /**
  * FXML Controller class
@@ -57,24 +65,94 @@ public class VistaRegisterController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        limpiarErrores();
+
+        imagenButton_register.setOnAction(this::seleccionarAvatar);
+        registerButton.setOnAction(this::registrarUsuario);
+
+    }
 
     @FXML
-    private void irLogin(ActionEvent event) {
-        try {
+    private void seleccionarAvatar(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar Imagen de Avatar");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
 
-            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) imagenButton_register.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
 
-            MapaDemoApp.cargarVista(
-                    "/Vistas/vistaLogin.fxml",
-                    stage
-            );
+        if (file != null) {
+            String path = file.getAbsolutePath();
+            fotoPath.setText(path);
 
-        } catch (Exception e) {
-
-            e.printStackTrace();
+            Image image = new Image(file.toURI().toString());
+            logoImagen.setImage(image);
         }
     }
+
+    @FXML
+    private void registrarUsuario(ActionEvent event) {
+        limpiarErrores();
+        boolean formValido = true;
+
+        String nickname = nickname_register.getText().trim();
+        String password = password_register.getText();
+        String email = mail_register.getText().trim();
+        LocalDate birthDate;
+        birthDate = date_register.getValue();
+        String avatarPath = fotoPath.getText().isEmpty() ? null : fotoPath.getText();
+
+        if (!User.checkNickName(nickname)) {
+            nicknameError.setText("Debe tener entre 6 y 15 caracteres (letras, dígitos, -, _).");
+            formValido = false;
+        }
+
+        if (!User.checkEmail(email)) {
+            mailError.setText("Formato de correo no válido.");
+            formValido = false;
+        }
+
+        if (!User.checkPassword(password)) {
+            paswordError.setText("Mínimo 8-20 chars, 1 mayúscula, 1 minúscula, 1 dígito y 1 símbolo.");
+            formValido = false;
+        }
+
+        if (birthDate == null) {
+            dateError.setText("Debes seleccionar una fecha.");
+            formValido = false;
+        } else if (!User.isOlderThan(birthDate, 12)) {
+            dateError.setText("Debes ser mayor de 12 años.");
+            formValido = false;
+        }
+
+        if (formValido) {
+            SportActivityApp app = MainApp.getApp();
+
+            try {
+                boolean exito = app.registerUser(nickname, email, password, birthDate, avatarPath);
+
+                if (exito) {
+                    MainApp.cargarLogin();
+                } else {
+                    nicknameError.setText("El nickname ya está en uso.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void limpiarErrores() {
+        nicknameError.setText("");
+        paswordError.setText("");
+        mailError.setText("");
+        dateError.setText("");
+    }
+
+    @FXML
+    private void irLogin(ActionEvent event) throws Exception {
+        App.MainApp.cargarLogin(); // o la navegación que tengas
+    }
 }
-    

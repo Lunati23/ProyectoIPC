@@ -1,4 +1,4 @@
-package mapademo;
+package Controladores;
 import javafx.geometry.Point2D;
 
 /*
