@@ -67,6 +67,7 @@ import upv.ipc.sportlib.Annotation;
 import upv.ipc.sportlib.AnnotationType;
 import upv.ipc.sportlib.GeoPoint;
 import upv.ipc.sportlib.MapProjection;
+import upv.ipc.sportlib.MapRegion;
 import upv.ipc.sportlib.SportActivityApp;
 
 /**
@@ -610,7 +611,7 @@ public class VisualizarActividadController implements Initializable {
 
         // ── Carga del mapa inicial ─────────────────────────────────────
         // El fichero se busca relativo al directorio de trabajo del proyecto.
-        buildMap(new File("maps/upv.jpg"));
+        
         
     }
 
@@ -1008,4 +1009,5 @@ public class VisualizarActividadController implements Initializable {
             System.err.println("Error abriendo el diálogo: " + ex.getMessage());
         }
     }
+
 }

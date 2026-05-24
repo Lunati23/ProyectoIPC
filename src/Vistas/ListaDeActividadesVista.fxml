@@ -3,16 +3,13 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox spacing="12" styleClass="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ListaDeActividadesController">
+<VBox fx:id="ListBox" spacing="12" styleClass="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ListaDeActividadesController">
 
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
@@ -34,76 +31,8 @@
     </HBox>
 
     <!-- ================= LISTA ================= -->
-    <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
-
-        <content>
-
-            <VBox spacing="10">
-
-                <!-- ================= ITEM ================= -->
-                <HBox spacing="15" styleClass="activity-item">
-
-                    <padding>
-                        <Insets bottom="12" left="12" right="12" top="12" />
-                    </padding>
-
-                    <!-- CHECK DELETE MODE -->
-                    <CheckBox fx:id="chkSelect1" managed="false" visible="false" />
-
-                    <ImageView fitHeight="40" fitWidth="40">
-                        <image>
-                            <Image url="@../resources/Icons/marcador-de-mapa.png" />
-                        </image>
-                    </ImageView>
-
-                    <VBox spacing="4">
-
-                        <Text styleClass="activity-title" text="Subida Montdúver" />
-                        <Text styleClass="activity-sub" text="Trail Running" />
-                        <Text styleClass="activity-sub" text="14.2 km · 2h 31m · +820 m" />
-
-                    </VBox>
-
-                    <Region HBox.hgrow="ALWAYS" />
-
-                    <Text styleClass="activity-sub" text="22 Mayo 2026" />
-
-                </HBox>
-
-                <!-- ITEM 2 -->
-                <HBox spacing="15" styleClass="activity-item">
-
-                    <padding>
-                        <Insets bottom="12" left="12" right="12" top="12" />
-                    </padding>
-
-                    <CheckBox fx:id="chkSelect2" managed="false" visible="false" />
-
-                    <ImageView fitHeight="40" fitWidth="40">
-                        <image>
-                            <Image url="@../resources/Icons/marcador-de-mapa.png" />
-                        </image>
-                    </ImageView>
-
-                    <VBox spacing="4">
-
-                        <Text styleClass="activity-title" text="Ruta Marxuquera" />
-                        <Text styleClass="activity-sub" text="Senderismo" />
-                        <Text styleClass="activity-sub" text="9.6 km · 1h 52m · +430 m" />
-
-                    </VBox>
-
-                    <Region HBox.hgrow="ALWAYS" />
-
-                    <Text styleClass="activity-sub" text="18 Mayo 2026" />
-
-                </HBox>
-
-            </VBox>
-
-        </content>
-
-    </ScrollPane>
+    <!-- Reemplaza la sección de LISTA con esto: -->
+    <ListView fx:id="activitiesListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
 
     <!-- CSS LOCAL -->
     <stylesheets>
