@@ -72,7 +72,11 @@ import upv.ipc.sportlib.MapRegion;
 import upv.ipc.sportlib.SportActivityApp;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import upv.ipc.sportlib.TrackPoint;
+import javafx.scene.Node;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.BorderPane;
 
 /**
  * Controlador principal de la aplicación de mapa con POIs.
@@ -114,6 +118,7 @@ public class VisualizarActividadController implements Initializable {
      * los elementos superpuestos (textos, círculos, etc.). Sus dimensiones
      * coinciden con las de la imagen cargada.
      */
+    @FXML
     private Pane mapPane;
 
     /**
@@ -192,6 +197,14 @@ public class VisualizarActividadController implements Initializable {
     private AnnotationType tipoCapturaActual = null;
     private double primerClickX = -1;
     private double primerClickY = -1;
+    @FXML
+    private Button returnButton;
+    @FXML
+    private Button Btn_Delete;
+    @FXML
+    private TabPane tabPane;
+    @FXML
+    private BorderPane BorderBox;
 
     // =========================================================
     //  MANEJADORES DE ZOOM
@@ -739,7 +752,6 @@ public class VisualizarActividadController implements Initializable {
      * @param event evento de acción del menú
      * @throws IOException si hay un problema al obtener la ruta canónica
      */
-    @FXML
     private void cambiarMapa(ActionEvent event) throws IOException {
         FileChooser fc = new FileChooser();
         fc.setInitialDirectory(new File(".")); // Empezamos en el directorio del proyecto
@@ -856,9 +868,25 @@ public class VisualizarActividadController implements Initializable {
 
             List<Point2D> puntosPixeles = proyeccionMapa.projectActivity(actividad);
             centrarRuta(puntosPixeles);
-            
+
             // Anotaciones previas
             cargarAnotacionesPrevias();
+            // Configurar botón eliminar
+            Btn_Delete.setDisable(true); // Deshabilitado por defecto
+            // Listener para mostrar/ocultar botón según tab
+            tabPane.getSelectionModel().selectedIndexProperty().addListener(
+                    (obs, oldVal, newVal) -> {
+                        // Tab 1 es "Anotaciones"
+                        boolean isAnotacionesTab = newVal.intValue() == 1;
+                        Btn_Delete.setVisible(isAnotacionesTab);
+                    }
+            );
+            // Listener para habilitar/deshabilitar según selección
+            map_listview.getSelectionModel().selectedItemProperty().addListener(
+                    (obs, oldVal, newVal) -> {
+                        Btn_Delete.setDisable(newVal == null);
+                    }
+            );
         }
         // Calcular y pintar grafica
         cargarDatosGrafico(actividad);
@@ -975,7 +1003,7 @@ public class VisualizarActividadController implements Initializable {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/AnadirAnotacion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/AnadirAnotacionVista.fxml"));
             javafx.scene.Parent root = loader.load();
 
             AnadirAnotacionController controladorSecundario = loader.getController();
@@ -1132,5 +1160,27 @@ public class VisualizarActividadController implements Initializable {
             map_scrollpane.setHvalue(hValue);
             map_scrollpane.setVvalue(vValue);
         });
+    }
+
+    
+
+    @FXML
+    private void eliminarAnotacion(ActionEvent event) {
+        Annotation anotacionSeleccionada = map_listview.getSelectionModel().getSelectedItem();
+        if (anotacionSeleccionada == null) {
+            return;
+        }
+
+        // Eliminar de BD (y actualiza actividadActual automáticamente)
+        SportActivityApp.getInstance().removeAnnotation(actividadActual, anotacionSeleccionada);
+
+        // Limpiar y redibujar
+        mapPane.getChildren().clear();
+        buildMap(new File(actividadActual.getSuggestedMap().getImagePath()));
+
+        pintarRuta();
+        cargarAnotacionesPrevias();
+
+        Btn_Delete.setDisable(true);
     }
 }

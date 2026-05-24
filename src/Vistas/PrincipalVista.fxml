@@ -141,7 +141,7 @@
             <VBox spacing="20">
 
                 <padding>
-                    <Insets bottom="25" left="25" right="25" top="25" />
+                    <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
                 </padding>
 
                 <Text styleClass="highlight-label" text="Inicio" />

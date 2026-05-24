@@ -163,5 +163,7 @@ public class PrincipalController implements Initializable {
             }
         });
     }
-
+    public void back(){
+        abrirActividades();
+    }
 }
