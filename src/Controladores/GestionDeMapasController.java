@@ -113,7 +113,8 @@ public class GestionDeMapasController implements Initializable {
             lblMapFile.setText("Ningún archivo...");
             rutaImagenSeleccionada = null;
 
-            mapListView.setItems(FXCollections.observableArrayList(app.getMapRegions()));
+            mapListView.getItems().clear();
+            mapListView.getItems().addAll(app.getMapRegions());
 
         } catch (NumberFormatException e) {
             System.out.println("Error: Las coordenadas deben ser números decimales válidos.");
