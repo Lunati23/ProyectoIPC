@@ -17,7 +17,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" stylesheets="@../EstilosVariados/estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.RegistroController">
    <children>
-      <VBox prefHeight="650.0" prefWidth="850.0">
+      <VBox prefHeight="650.0" prefWidth="850.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="200.0" styleClass="header">
                <children>
@@ -33,7 +33,6 @@
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="app-title" text="SaforRun" textAlignment="RIGHT" wrappingWidth="136.19928359985352" GridPane.columnIndex="1" />
                         <Button fx:id="returnButton" mnemonicParsing="false" onAction="#irLogin" styleClass="back-button" text="←" />
-                        <ImageView fitHeight="150.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true" styleClass="logo" GridPane.columnIndex="2" />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="logo" GridPane.columnIndex="2">
                            <image>
                               <Image url="@../logos/logo_montana.png" />
@@ -43,56 +42,58 @@
                   </GridPane>
                </children>
             </HBox>
+            
             <HBox alignment="CENTER" prefHeight="111.0" prefWidth="543.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Registro" />
                </children>
             </HBox>
-            <VBox alignment="CENTER" prefHeight="544.0" prefWidth="850.0">
+            
+            <VBox alignment="CENTER" prefHeight="544.0" prefWidth="850.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="411.0" prefWidth="850.0">
+                  <HBox alignment="CENTER" fillHeight="false" prefHeight="411.0" prefWidth="850.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <GridPane prefHeight="401.0" prefWidth="501.0">
+                        <GridPane alignment="CENTER" prefHeight="401.0" prefWidth="501.0" vgap="15.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label styleClass="form-label" text="Nombre de usuario*" />
                                     <TextField fx:id="nickname_register" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="500.0" promptText="ej.: pepito123" />
                                     <Label fx:id="nicknameError" styleClass="error-label" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                  <children>
                                     <Label styleClass="form-label" text="Contraseña*" />
                                     <PasswordField fx:id="password_register" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" promptText="*************" />
                                     <Label fx:id="paswordError" styleClass="error-label" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                                  <children>
                                     <Label styleClass="form-label" text="Correo electrónico*" />
                                     <TextField fx:id="mail_register" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="500.0" promptText="ej.: pepito@gmail.com" />
                                     <Label fx:id="mailError" styleClass="error-label" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
                                  <children>
                                     <Label styleClass="form-label" text="Fecha de nacimiento*" />
                                     <DatePicker fx:id="date_register" promptText="06/06/2006" />
                                     <Label fx:id="dateError" styleClass="error-label" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                                  <children>
                                     <GridPane prefHeight="67.0" prefWidth="574.0">
                                       <columnConstraints>
