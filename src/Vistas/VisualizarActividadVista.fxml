@@ -23,6 +23,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.NumberAxis?>
 
 <BorderPane prefHeight="650.0" prefWidth="850.0" styleClass="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.VisualizarActividadController">
    
@@ -173,7 +175,22 @@
                            </content>
                       </Tab>
                       
-                      <Tab text="Desnivel" />
+                      <Tab text="Desnivel">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF; -fx-padding: 10;">
+                                 <children>
+                                    <AreaChart fx:id="chartDesnivel" title="Perfil de Desnivel" VBox.vgrow="ALWAYS">
+                                      <xAxis>
+                                        <NumberAxis label="Distancia (km)" side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis label="Altitud (m)" side="LEFT" />
+                                      </yAxis>
+                                    </AreaChart>
+                                 </children>
+                              </VBox>
+                           </content>
+                      </Tab>
                     </tabs>
                   </TabPane>
                   
