@@ -12,7 +12,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -132,7 +136,32 @@ public class RegistroController implements Initializable {
                 boolean exito = app.registerUser(nickname, email, password, birthDate, avatarPath);
 
                 if (exito) {
-                    MainApp.cargarLogin();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Registro completado");
+                    alert.setHeaderText(null);
+                    
+                    alert.setGraphic(null);
+                    
+                    Label mensaje = new Label("¡Registrado correctamente!");
+                    alert.getDialogPane().setContent(mensaje);
+                    
+                    URL cssUrl = getClass().getResource("/EstilosVariados/estilos.css");
+                    if (cssUrl != null) {
+                        alert.getDialogPane().getStylesheets().add(cssUrl.toExternalForm());
+                    }
+                    
+                    ButtonType btnContinuar = new ButtonType("Continuar al login");
+                    alert.getButtonTypes().setAll(btnContinuar);
+                    
+                    alert.showAndWait().ifPresent(response -> {
+                        if (response == btnContinuar) {
+                            try {
+                                MainApp.cargarLogin();
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    });
                 } else {
                     nicknameError.setText("El nickname ya está en uso.");
                 }
@@ -151,6 +180,6 @@ public class RegistroController implements Initializable {
 
     @FXML
     private void irLogin(ActionEvent event) throws Exception {
-        App.MainApp.cargarLogin(); // o la navegación que tengas
+        App.MainApp.cargarLogin(); 
     }
 }
