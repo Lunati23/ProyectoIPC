@@ -35,7 +35,7 @@
             <Insets bottom="14.0" left="22.0" right="22.0" top="14.0" />
          </padding>
          <children>
-            <Text fx:id="nombreActividadLabel" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitle" text="Nombre Actividad" />
+            <Text fx:id="nombreActividadLabel" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Nombre Actividad" />
          </children>
       </HBox>
    </top>

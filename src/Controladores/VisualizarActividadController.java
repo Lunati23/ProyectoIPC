@@ -169,7 +169,7 @@ public class VisualizarActividadController implements Initializable {
     @FXML
     private Label mousePosition;
     @FXML
-    private Label nombreActividadLabel;
+    private Text nombreActividadLabel;
     @FXML
     private Label distancia;
     @FXML
@@ -197,8 +197,6 @@ public class VisualizarActividadController implements Initializable {
     private AnnotationType tipoCapturaActual = null;
     private double primerClickX = -1;
     private double primerClickY = -1;
-    @FXML
-    private Button returnButton;
     @FXML
     private Button Btn_Delete;
     @FXML
