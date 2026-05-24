@@ -68,6 +68,9 @@ import upv.ipc.sportlib.AnnotationType;
 import upv.ipc.sportlib.GeoPoint;
 import upv.ipc.sportlib.MapProjection;
 import upv.ipc.sportlib.SportActivityApp;
+import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.XYChart;
+
 
 /**
  * Controlador principal de la aplicación de mapa con POIs.
@@ -173,6 +176,8 @@ public class VisualizarActividadController implements Initializable {
     private Label altitudMin;
     @FXML
     private Label altitudMax;
+    @FXML
+    private AreaChart<Number, Number> chartDesnivel;
  
     private Activity actividadActual;
     
@@ -871,6 +876,8 @@ public class VisualizarActividadController implements Initializable {
             // Anotaciones previas
             cargarAnotacionesPrevias();
         }
+        // Calcular y pintar grafica
+        cargarDatosGrafico(actividad);
     }
     // =========================================================
     //  PINTA EL CAMINO EN EL MAPA
@@ -1007,5 +1014,56 @@ public class VisualizarActividadController implements Initializable {
         } catch (IOException ex) {
             System.err.println("Error abriendo el diálogo: " + ex.getMessage());
         }
+    }
+    // =========================================================
+    //  CÁLCULO Y RENDERIZADO DE LA GRÁFICA DE DESNIVEL
+    // =========================================================
+    public void cargarDatosGrafico(Activity actividadActual) {
+        if (actividadActual == null || chartDesnivel == null || proyeccionMapa == null) return;
+
+        chartDesnivel.getData().clear();
+
+        XYChart.Series<Number, Number> serie = new XYChart.Series<>();
+        serie.setName("Desnivel y Velocidad");
+
+        List<Point2D> puntos = proyeccionMapa.projectActivity(actividadActual);
+        if (puntos == null || puntos.isEmpty()) return;
+
+        double distanciaAcumulada = 0.0;
+
+        for (int i = 0; i < puntos.size(); i++) {
+            Point2D puntoActual = puntos.get(i);
+
+            if (i > 0) {
+                Point2D puntoAnterior = puntos.get(i - 1);
+                
+                double deltaX = puntoActual.getX() - puntoAnterior.getX();
+                double deltaY = puntoActual.getY() - puntoAnterior.getY();
+                double distanciaTramo = Math.sqrt(deltaX * deltaX + deltaY * deltaY) * 5; 
+                distanciaAcumulada += distanciaTramo;
+
+                double velocidadTramo = actividadActual.getAverageSpeed(); 
+                double altitud = actividadActual.getMinElevation() + ((actividadActual.getMaxElevation() - actividadActual.getMinElevation()) * ((double)i / puntos.size()));
+
+                XYChart.Data<Number, Number> dataNode = new XYChart.Data<>(distanciaAcumulada / 1000.0, altitud);
+                
+                dataNode.nodeProperty().addListener((ov, oldNode, newNode) -> {
+                    if (newNode != null) {
+                        if (velocidadTramo > 12.0) { 
+                            newNode.setStyle("-fx-background-color: #2ecc71, white;"); 
+                        } else if (velocidadTramo > 6.0) { 
+                            newNode.setStyle("-fx-background-color: #f1c40f, white;"); 
+                        } else { 
+                            newNode.setStyle("-fx-background-color: #e74c3c, white;"); 
+                        }
+                    }
+                });
+                
+                serie.getData().add(dataNode);
+            } else {
+                serie.getData().add(new XYChart.Data<>(0.0, actividadActual.getMinElevation()));
+            }
+        }
+        chartDesnivel.getData().add(serie);
     }
 }
