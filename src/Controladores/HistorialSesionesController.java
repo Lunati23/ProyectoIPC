@@ -17,7 +17,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -154,8 +157,36 @@ public class HistorialSesionesController implements Initializable {
     
     @FXML
     private void cerrarSesion(ActionEvent event) throws Exception {
-        app.logout();
-        MainApp.cargarLogin();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setHeaderText(null);
+        alert.setGraphic(null);
+        alert.setContentText("¿Cerrar sesión?");
+        
+        URL cssUrl = getClass().getResource("/EstilosVariados/estilos.css");
+        if (cssUrl != null) {
+            alert.getDialogPane().getStylesheets().add(cssUrl.toExternalForm());
+        }
+
+        ButtonType btnCerrar = new ButtonType("Cerrar sesión", ButtonBar.ButtonData.OK_DONE);
+        ButtonType btnCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+        
+        alert.getButtonTypes().setAll(btnCerrar, btnCancelar);
+        
+        Button cerrarButton = (Button) alert.getDialogPane().lookupButton(btnCerrar);
+
+        cerrarButton.getStyleClass().add("danger-button");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == btnCerrar) {
+                try {
+                    app.logout();
+                    MainApp.cargarLogin();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
     
     
