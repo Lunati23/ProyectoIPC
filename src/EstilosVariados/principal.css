@@ -22,3 +22,13 @@ Ejemplo si necesitas algo MUY específico de esta pantalla:
     -fx-padding: 30;
 }
 */
+
+.perfil {
+    -fx-fit-width: 55;
+    -fx-fit-height: 55;
+    -fx-border-radius: 27.5;
+    -fx-background-radius: 27.5;
+    -fx-clip-to-bound: true;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1;
+}
