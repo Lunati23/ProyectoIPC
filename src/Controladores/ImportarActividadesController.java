@@ -14,7 +14,7 @@ import upv.ipc.sportlib.Activity;
 
 import upv.ipc.sportlib.SportActivityApp;
 
-public class VistaImportarActividadesController implements Initializable {
+public class ImportarActividadesController implements Initializable {
 
     @FXML private Button btnImportar;
 
@@ -112,7 +112,7 @@ public class VistaImportarActividadesController implements Initializable {
         System.out.println("Actividad importada: " +
             actividadImportada.getName()
         );
-
+        //Pendiente de Paola//
         btnImportar.setDisable(true);
     }
 

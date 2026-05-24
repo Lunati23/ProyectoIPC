@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.GestionDeMapasController">
+
+    <children>
+
+        <BorderPane stylesheets="@../EstilosVariados/estilos.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+            <!-- ================= CENTER ================= -->
+            <center>
+
+                <SplitPane dividerPositions="0.3" BorderPane.alignment="CENTER">
+
+                    <items>
+
+                        <!-- ================= LEFT ================= -->
+                        <AnchorPane>
+
+                            <VBox spacing="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+
+                                <Label styleClass="subtitle" text="Mapas Registrados" />
+
+                                <ListView fx:id="mapListView" VBox.vgrow="ALWAYS" />
+
+                                <Button fx:id="btnDeleteMap" maxWidth="1.7976931348623157E308" onAction="#eliminarMapa" style="-fx-background-color:#E74C3C; -fx-font-weight:bold;" text="Eliminar Mapa" />
+
+                            </VBox>
+
+                        </AnchorPane>
+
+                        <!-- ================= RIGHT ================= -->
+                        <AnchorPane>
+
+                            <VBox spacing="15" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+
+                                <Label styleClass="subtitle" text="Añadir Nuevo Mapa" />
+
+                                <GridPane hgap="10" vgap="20">
+
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="ALWAYS" />
+                                        <ColumnConstraints hgrow="ALWAYS" />
+                                    </columnConstraints>
+
+                                    <children>
+
+                                        <Label text="Nombre:" />
+                                        <TextField fx:id="txtNombre" GridPane.columnIndex="1" />
+
+                                        <Label text="Imagen:" GridPane.rowIndex="1" />
+                                        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+
+                                            <Button fx:id="lblBrowseMap" onAction="#buscarImagen" text="Examinar" />
+
+                                            <Label fx:id="lblMapFile" text="Ningún archivo" />
+
+                                        </HBox>
+
+                                        <Label text="Lat Min:" GridPane.rowIndex="2" />
+                                        <TextField fx:id="txtLatMin" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                        <Label text="Lat Max:" GridPane.rowIndex="3" />
+                                        <TextField fx:id="txtLatmax" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                                        <Label text="Lon Min:" GridPane.rowIndex="4" />
+                                        <TextField fx:id="txtlonMin" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                                        <Label text="Lon Max:" GridPane.rowIndex="5" />
+                                        <TextField fx:id="txtLonMax" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                                    </children>
+                           <rowConstraints>
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                           </rowConstraints>
+
+                                </GridPane>
+
+                                <Button fx:id="btnSaveMap" maxWidth="200" onAction="#guardarMapa" text="Guardar Mapa" />
+
+                            </VBox>
+
+                        </AnchorPane>
+
+                    </items>
+
+                </SplitPane>
+
+            </center>
+
+        </BorderPane>
+
+    </children>
+
+</AnchorPane>

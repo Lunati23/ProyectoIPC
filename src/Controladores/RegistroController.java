@@ -21,8 +21,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import mapademo.MapaDemoApp;
-
 import upv.ipc.sportlib.User;
 import upv.ipc.sportlib.SportActivityApp;
 
@@ -31,7 +29,7 @@ import upv.ipc.sportlib.SportActivityApp;
  *
  * @author vinte
  */
-public class VistaRegisterController implements Initializable {
+public class RegistroController implements Initializable {
 
     @FXML
     private Button returnButton;
@@ -128,7 +126,7 @@ public class VistaRegisterController implements Initializable {
         }
 
         if (formValido) {
-            SportActivityApp app = MainApp.getApp();
+            SportActivityApp app = SportActivityApp.getInstance();
 
             try {
                 boolean exito = app.registerUser(nickname, email, password, birthDate, avatarPath);

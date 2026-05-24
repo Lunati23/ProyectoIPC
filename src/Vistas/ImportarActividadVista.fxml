@@ -10,36 +10,23 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0"
-      prefWidth="900.0"
-      spacing="15"
-      xmlns="http://javafx.com/javafx/25"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="Controladores.VistaImportarActividadesController">
+<VBox prefHeight="600.0" prefWidth="900.0" spacing="15" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ImportarActividadesController">
 
     <padding>
         <Insets bottom="25" left="25" right="25" top="25" />
     </padding>
 
     <!-- TITULO -->
-    <Label styleClass="highlight-label"
-           text="Importar actividad" />
+    <Label styleClass="highlight-label" text="Importar actividad" />
 
-    <Label styleClass="import-subtitle"
-           text="Selecciona un archivo GPX para añadir una nueva actividad" />
+    <Label styleClass="import-subtitle" text="Selecciona un archivo GPX para añadir una nueva actividad" />
 
     <!-- DROPZONE (CLICK EN TODA LA ZONA) -->
-    <StackPane fx:id="previewArea"
-               onMouseClicked="#seleccionarArchivo"
-               prefHeight="360"
-               styleClass="drop-zone">
+    <StackPane fx:id="previewArea" onMouseClicked="#seleccionarArchivo" prefHeight="360" styleClass="drop-zone">
 
         <VBox alignment="CENTER" spacing="12">
 
-            <ImageView fx:id="imgPreview"
-                       fitHeight="90"
-                       fitWidth="90"
-                       preserveRatio="true">
+            <ImageView fx:id="imgPreview" fitHeight="90" fitWidth="90" preserveRatio="true">
 
                 <image>
                     <Image url="@../resources/Icons/agregar.png" />
@@ -47,14 +34,9 @@
 
             </ImageView>
 
-            <Label fx:id="lblDrop"
-                   styleClass="drop-text"
-                   text="Haz click para seleccionar un archivo GPX" />
+            <Label fx:id="lblDrop" styleClass="drop-text" text="Haz click para seleccionar un archivo GPX" />
 
-            <Button fx:id="btnSeleccionar"
-                    onAction="#seleccionarArchivo"
-                    styleClass="primary-button"
-                    text="Seleccionar archivo" />
+            <Button fx:id="btnSeleccionar" onAction="#seleccionarArchivo" styleClass="primary-button" text="Seleccionar archivo" />
 
         </VBox>
 
@@ -83,15 +65,9 @@
     <!-- BOTONES -->
     <HBox spacing="15">
 
-        <Button fx:id="btnCancel"
-                onAction="#cancelarImportacion"
-                styleClass="secondary-button"
-                text="Cancelar" />
+        <Button fx:id="btnCancel" onAction="#cancelarImportacion" styleClass="secondary-button" text="Cancelar" />
 
-        <Button fx:id="btnImportar"
-                onAction="#importarActividad"
-                styleClass="primary-button"
-                text="Importar actividad" />
+        <Button fx:id="btnImportar" onAction="#importarActividad" styleClass="primary-button" text="Importar actividad" />
 
     </HBox>
 

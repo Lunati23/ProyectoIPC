@@ -4,6 +4,7 @@
  */
 package Controladores;
 
+import App.MainApp;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
@@ -23,7 +24,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import mapademo.MapaDemoApp;
 
 import upv.ipc.sportlib.SportActivityApp;
 import upv.ipc.sportlib.User;
@@ -32,7 +32,7 @@ import upv.ipc.sportlib.User;
  *
  * @author vinte
  */
-public class VistaPerfilController implements Initializable {
+public class PerfilController implements Initializable {
 
     @FXML
     private Button returnButton_profile;
@@ -79,7 +79,6 @@ public class VistaPerfilController implements Initializable {
         cargarDatosUsuario();
         
         changesButton_profile.setOnAction(this::guardarCambios);
-        returnButton_profile.setOnAction(this::volver);
         if (imagenButton_profile != null) {
             imagenButton_profile.setOnAction(this::seleccionarNuevoAvatar);
         }
@@ -186,14 +185,8 @@ public class VistaPerfilController implements Initializable {
 
     
      @FXML
-    private void volver(ActionEvent event) {
-        try {
-            Stage stage = (Stage) returnButton_profile.getScene().getWindow();
-            
-            MapaDemoApp.cargarVista("/Vistas/vistaPerfil.fxml", stage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void volver(ActionEvent event) throws Exception {
+         MainApp.cargarPrincipal();
     }
 
     private void limpiarErrores() {

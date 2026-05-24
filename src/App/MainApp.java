@@ -18,7 +18,7 @@ public class MainApp extends Application {
         primaryStage = stage;
 
         Parent root = FXMLLoader.load(
-                getClass().getResource("/Vistas/VistaLogin.fxml")
+                getClass().getResource("/Vistas/LoginVista.fxml")
         );
 
         stage.setScene(new Scene(root));
@@ -29,7 +29,7 @@ public class MainApp extends Application {
     public static void cargarPrincipal() throws Exception {
 
         Parent root = FXMLLoader.load(
-                MainApp.class.getResource("/Vistas/VistaPrincipal.fxml")
+                MainApp.class.getResource("/Vistas/PrincipalVista.fxml")
         );
 
         primaryStage.getScene().setRoot(root);
@@ -38,7 +38,7 @@ public class MainApp extends Application {
     public static void cargarRegistro() throws Exception {
 
         Parent root = FXMLLoader.load(
-                MainApp.class.getResource("/Vistas/vistaRegister.fxml")
+                MainApp.class.getResource("/Vistas/RegistroVista.fxml")
         );
 
         primaryStage.getScene().setRoot(root);
@@ -47,7 +47,16 @@ public class MainApp extends Application {
     public static void cargarLogin() throws Exception {
 
         Parent root = FXMLLoader.load(
-                MainApp.class.getResource("/Vistas/vistaLogin.fxml")
+                MainApp.class.getResource("/Vistas/LoginVista.fxml")
+        );
+
+        primaryStage.getScene().setRoot(root);
+    }
+    
+    public static void cargarPerfil() throws Exception {
+
+        Parent root = FXMLLoader.load(
+                MainApp.class.getResource("/Vistas/PerfilVista.fxml")
         );
 
         primaryStage.getScene().setRoot(root);
@@ -57,7 +66,4 @@ public class MainApp extends Application {
         launch(args);
     }
 
-    public static SportActivityApp getApp() {
-        return app;
-    }
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane stylesheets="@../EstilosVariados/estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.HistorialSesionesController">
+
+    <children>
+
+        <BorderPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+            <!-- TÍTULO ARRIBA IZQUIERDA -->
+            <top>
+                <VBox spacing="5">
+                    <padding>
+                        <Insets bottom="10" left="20" right="20" top="20" />
+                    </padding>
+
+                    <Label styleClass="highlight-label" text="Historial de sesiones" />
+                </VBox>
+            </top>
+
+            <!-- CONTENIDO -->
+            <center>
+
+                <VBox fillWidth="true" spacing="20">
+
+                    <padding>
+                        <Insets bottom="20" left="20" right="20" top="10" />
+                    </padding>
+
+                    <!-- STATS -->
+                    <HBox alignment="CENTER" spacing="40">
+
+                        <VBox alignment="CENTER">
+                            <Label fx:id="sesionesLabel" styleClass="stat-number" text="0" />
+                            <Label text="Sesiones totales" />
+                        </VBox>
+
+                        <VBox alignment="CENTER">
+                            <Label fx:id="importadasLabel" styleClass="stat-number" text="0" />
+                            <Label text="Actividades importadas" />
+                        </VBox>
+
+                        <VBox alignment="CENTER">
+                            <Label fx:id="visualizadasLabel" styleClass="stat-number" text="0" />
+                            <Label text="Actividades visualizadas" />
+                        </VBox>
+
+                        <VBox alignment="CENTER">
+                            <Label fx:id="anotacionesLabel" styleClass="stat-number" text="0" />
+                            <Label text="Anotaciones creadas" />
+                        </VBox>
+
+                    </HBox>
+
+                    <!-- TABLE (ESTO ES LO IMPORTANTE) -->
+                    <TableView fx:id="tableView_historial" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+
+                        <columns>
+                            <TableColumn fx:id="fechaColumn" text="Fecha" />
+                            <TableColumn fx:id="inicioColumn" text="Inicio" />
+                            <TableColumn fx:id="finColumn" text="Fin" />
+                            <TableColumn fx:id="duracionColumn" text="Duración" />
+                            <TableColumn fx:id="tiempoColumn" text="Tiempo" />
+                            <TableColumn fx:id="importadasColumn" text="Act. Importadas" />
+                            <TableColumn fx:id="vistasColumn" text="Act. Vistas" />
+                            <TableColumn fx:id="anotacionesColumn" text="Anotaciones" />
+                        </columns>
+                  <columnResizePolicy>
+                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                  </columnResizePolicy>
+
+                    </TableView>
+
+                    <!-- BOTÓN -->
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button fx:id="cerrarSesionButton" onAction="#cerrarSesion" styleClass="danger-button" text="Cerrar sesión" />
+                    </HBox>
+
+                </VBox>
+
+            </center>
+
+        </BorderPane>
+
+    </children>
+</AnchorPane>

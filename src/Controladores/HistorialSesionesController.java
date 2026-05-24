@@ -4,6 +4,7 @@
  */
 package Controladores;
 
+import App.MainApp;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -21,7 +22,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import mapademo.MapaDemoApp;
 
 import upv.ipc.sportlib.Session;
 import upv.ipc.sportlib.SportActivityApp;
@@ -32,7 +32,7 @@ import upv.ipc.sportlib.User;
  *
  * @author vinte
  */
-public class VistaHistorialSesionesController implements Initializable {
+public class HistorialSesionesController implements Initializable {
 
     @FXML
     private Button volver_historial;
@@ -79,8 +79,6 @@ public class VistaHistorialSesionesController implements Initializable {
         app = SportActivityApp.getInstance();
         currentUser = app.getCurrentUser();
         
-        volver_historial.setOnAction(this::volver);
-        cerrarSesionButton.setOnAction(this::cerrarSesion);
         
         if (currentUser != null) {
             cargarDatosSesiones();
@@ -153,36 +151,12 @@ public class VistaHistorialSesionesController implements Initializable {
         return String.format("%02d:%02d:%02d", s / 3600, (s % 3600) / 60, (s % 60));
     }
 
-    @FXML
-    private void volver(ActionEvent event) {
-        try {
-            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            MapaDemoApp.cargarVista("/Vistas/Principal.fxml", stage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     
     @FXML
-    private void cerrarSesion(ActionEvent event) {
+    private void cerrarSesion(ActionEvent event) throws Exception {
         app.logout();
-        irLogin(event);
+        MainApp.cargarLogin();
     }
     
-    @FXML
-    private void irLogin(ActionEvent event) {
-        try {
-            Stage stage = (Stage)((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
-            MapaDemoApp.cargarVista(
-                    "/Vistas/vistaLogin.fxml",
-                    stage
-            );
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-    }
     
 }

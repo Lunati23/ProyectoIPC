@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" stylesheets="@../EstilosVariados/estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.VistaPerfilController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" stylesheets="@../EstilosVariados/estilos.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PerfilController">
    <children>
       <BorderPane layoutX="4.0" prefHeight="664.0" prefWidth="850.0">
          <top>
@@ -35,7 +35,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="returnButton_profile" mnemonicParsing="false" prefHeight="40.0" prefWidth="59.0" styleClass="back-button" text="←" />
+                              <Button fx:id="returnButton_profile" mnemonicParsing="false" onAction="#volver" prefHeight="40.0" prefWidth="59.0" styleClass="back-button" text="←" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Mi perfil" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>

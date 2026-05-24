@@ -6,14 +6,25 @@ package Controladores;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
  *
  * @author Michael
  */
-public class VistaListaDeActividadesController implements Initializable {
+public class AcumuladosController implements Initializable {
+
+    @FXML
+    private Text txtDistancia;
+    @FXML
+    private Text txtTiempo;
+    @FXML
+    private Text txtAscenso;
+    @FXML
+    private Text txtDescenso;
 
     /**
      * Initializes the controller class.

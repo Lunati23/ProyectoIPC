@@ -10,7 +10,7 @@ import App.MainApp;
 import javafx.stage.Stage;
 import upv.ipc.sportlib.SportActivityApp;
 
-public class VistaLoginController implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
     private TextField nickname_login;
@@ -39,7 +39,7 @@ public class VistaLoginController implements Initializable {
             return;
         }
 
-        SportActivityApp app = MainApp.getApp();
+        SportActivityApp app = SportActivityApp.getInstance();
         boolean ok = app.login(user, pass);
 
         if (ok) {
