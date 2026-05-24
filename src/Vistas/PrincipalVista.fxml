@@ -144,8 +144,8 @@
                     <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
                 </padding>
 
-                <Text styleClass="highlight-label" text="Inicio" />
-                <Text text="Selecciona una opción del menú lateral." />
+                <Text styleClass="subtitle" text="Inicio" />
+                <Text styleClass="small-text" text="Selecciona una opción del menú lateral." />
 
             </VBox>
 
