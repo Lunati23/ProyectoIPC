@@ -1,4 +1,9 @@
-/build/
-/dist/
-/nbproject/private/
-/nbproject/project/properties/
+nbproject/private/
+nbproject/build-impl.xml
+
+build/
+dist/
+manifest.mf
+build.xml
+
+*.db
